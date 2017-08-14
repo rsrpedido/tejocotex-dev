@@ -7,7 +7,7 @@
             {% if block.settings.image != blank %}
             {%- assign img_url = block.settings.image | img_url: '2000x' -%}
              <img src="{{ img_url }}" alt="{{ block.settings.image.alt }}">
-             {% else %} 	
+             {% else %}
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
             {% endif %}
           {% if block.settings.three_block_heading_banner %}
@@ -63,7 +63,7 @@
             "label": "Heading Banner Size",
             "default": "24",
             "info": "Default Value: 24"
-          },      
+          },
           {
             "type": "url",
             "id": "link",

@@ -1,0 +1,29 @@
+{% if section.settings.homepage_title != blank %}
+  <div class="widget-new-title {{section.id}} container">
+    <div class="widget-title wow fadeIn">
+      <fieldset class="box-title">
+        <legend align="center">{{ section.settings.homepage_title | escape}}</legend>
+      </fieldset>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Homepage Heading",
+	"class": "index-section",
+    "settings": [
+        {
+          "type": "text",
+          "id": "homepage_title",
+          "label": "Heading Text"
+        }
+	     ],
+     "presets": [
+       {
+         "name": "Homepage Heading",
+         "category": "Heading"
+       }
+ 	]
+  }
+{% endschema %}
