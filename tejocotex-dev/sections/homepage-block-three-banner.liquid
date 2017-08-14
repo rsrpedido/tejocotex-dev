@@ -1,0 +1,94 @@
+{% if section.settings.display_three_block_banner %}
+<div class="banner-home-top container">
+  <ul class="row">
+    {% for block in section.blocks %}
+    <li class="col-xs-12 col-sm-4 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load }}ms">
+        <a href="{{ block.settings.link }}">
+            {% if block.settings.image != blank %}
+            {%- assign img_url = block.settings.image | img_url: '2000x' -%}
+             <img src="{{ img_url }}" alt="{{ block.settings.image.alt }}">
+             {% else %} 	
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          {% if block.settings.three_block_heading_banner %}
+             <h4 style="{% if block.settings.three_block_heading_size != blank %}font-size: {{ block.settings.three_block_heading_size }}px;{% endif %}{% if block.settings.three_block_heading_color != blank %}color: {{ block.settings.three_block_heading_color }};{% endif %}">{% include 'multilang' with block.settings.three_block_heading_banner %}</h4>
+          {% endif %}
+        </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Three Banner Block",
+    "class": "index-section index-section--flush",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "display_three_block_banner",
+        "label": "Enable",
+        "default": true
+      }
+
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+			"info": "Width: 380px recommended"
+          },
+          {
+            "type": "text",
+            "id": "three_block_heading_banner",
+            "label": "Heading Banner",
+            "default": "Bras"
+          },
+          {
+            "type": "color",
+            "id": "three_block_heading_color",
+            "label": "Heading Banner Color",
+            "default": "#fff",
+            "info": "Default Value: #fff"
+          },
+          {
+            "type": "text",
+            "id": "three_block_heading_size",
+            "label": "Heading Banner Size",
+            "default": "24",
+            "info": "Default Value: 24"
+          },      
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link",
+            "info": "Optional"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Block Three Banner",
+        "category": "Advanced layout",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

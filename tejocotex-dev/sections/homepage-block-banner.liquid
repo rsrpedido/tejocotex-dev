@@ -1,0 +1,103 @@
+ {% if section.settings.display_banner %}
+<div class="banner wow fadeInUp">
+   {% if section.settings.banner != blank %}
+  {%- assign img_url = section.settings.banner | img_url: '2000x' -%}
+   <img src="{{ img_url }}"  alt="{{ section.settings.image.alt }}" />
+  {% else %}
+  {% capture current %}{% cycle 2 %}{% endcapture %}
+  {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+  {% endif %}
+  <div class="container">
+    <div class="inner">
+      <div class="content">
+      {% if section.settings.banner_text_title != blank %}
+        <h2>
+           {% include 'multilang' with section.settings.banner_text_title %}
+        </h2>
+        <p class="line">&nbsp;</p>
+      {% endif %}
+      
+      {% if section.settings.banner_text_description != blank %}
+        <p class="text-center">
+          {% include 'multilang' with section.settings.banner_text_description %}
+        </p>
+      {% endif %}
+      
+     {% if section.settings.banner_button_text != blank %}
+        <a href="{{ section.settings.banner_button_link }}" class="btn">
+          {% include 'multilang' with section.settings.banner_button_text %}
+          <span class="arrow">arrow</span>
+        </a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+ 
+</div>
+ {% endif %}
+{% schema %}
+  {
+    "name": "Hompage Block Banner",
+ 	"class": "index-section",
+    "settings": [
+	{
+        "type": "checkbox",
+        "id": "display_banner",
+        "label": "Block Banner Home Page?",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "banner",
+        "label": "Banner Image"
+      },
+      {
+        "type": "text",
+        "id": "banner_text_title",
+        "label": "Block Banner Title",
+        "default": "Milancelos"
+      },
+      {
+        "type": "color",
+        "id": "banner_text_title_color",
+        "label": "Title Color",
+        "default": "#000"
+      },
+      {
+        "type": "textarea",
+        "id": "banner_text_description",
+        "label": "Block Banner Description",
+        "default": "Pellentesque posuere orci lobortis scelerisque blandit. Donec id tellus lacinia an, tincidunt risus ac, consequat velit. Quisquemos sodales suscipit tortor ditaemcos condimentum lacus meleifend menean viverra auctor blanditos comodous."
+      },
+      {
+        "type": "color",
+        "id": "banner_text_description_color",
+        "label": "Description Text Color",
+        "default": "#2d2d2d"
+      },
+      {
+        "type": "text",
+        "id": "banner_button_text",
+        "label": "Block Banner Button",
+        "default": "Shop The Collection"
+      },
+      {
+        "type": "url",
+        "id": "banner_button_link",
+        "label": "Block Banner Link"
+        
+      }
+	],
+	"presets": [
+      {
+        "name": "Hompage Block Banner",
+        "category": "Advanced layout"
+	  }
+    ]
+  }
+{% endschema %}
+<style>
+  .banner h2 span { color: {{ section.settings.banner_text_title_color }}; }
+  .banner p.line { background: {{ section.settings.banner_text_title_color }}; }
+  .banner p.text-center span { color: {{ section.settings.banner_text_description_color }}; }
+</style>

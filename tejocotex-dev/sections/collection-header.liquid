@@ -1,0 +1,50 @@
+<header class="page-header">
+  {% if section.settings.display_image_cat %}
+    <div class="img_cart">
+      {% if section.settings.img_cat != blank %}
+      <img src="{{ section.settings.img_cat | img_url :"master"}}" alt="{{ collection.title | split: '|' | first }}" />
+     {% else %}
+        {% capture current %}{% cycle 2%}{% endcapture %}
+        {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+       {% endif %}
+    </div>
+  {% endif %}
+
+  {% if settings.enable_multilang %}
+  <h2>
+    <span class="lang1">{{ collection.title | split: '|' | first }}</span>
+    <span class="lang2">{{ collection.title | split: '|' | last }}</span>
+  </h2>
+  {% else %}
+  	<h2>{{ collection.title | split: '|' | first }}</h2>
+  {% endif %}
+
+  {% if collection.description != ''  %}
+  <div class="collection-des">
+    {% if settings.enable_multilang %}      
+      <div class="rte lang1">{{ collection.description | split: '[lang2]' | first }}</div>
+      <div class="rte lang2">{{ collection.description | split: '[lang2]' | last }}</div>
+    {% else %}
+  	  <div class="rte">{{ collection.description | split: '[lang2]' | first }}</div>
+    {% endif %}
+  </div>
+  {% endif %}      
+</header>
+{% schema %}
+  {
+    "name": "Collection Header",
+    "settings": [
+	   {
+        "type": "checkbox",
+        "id": "display_image_cat",
+        "label": "Display Image Category?",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "img_cat",
+        "label": "Image Category"
+      }
+	]
+  }
+{% endschema %}

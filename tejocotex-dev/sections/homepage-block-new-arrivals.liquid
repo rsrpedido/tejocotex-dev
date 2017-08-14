@@ -1,0 +1,173 @@
+{% if section.settings.show_product_list_home_page%}
+  <div class="widget-new-product {{section.id}} container">
+    {% if section.settings.product_list_title != blank %}
+    <div class="widget-title wow fadeIn">   
+      {% if settings.enable_multilang %}
+      <fieldset class="box-title lang1">
+        <legend align="center">{{ section.settings.product_list_title | split: '|' | first }}</legend>
+      </fieldset>
+      <fieldset class="box-title lang2">
+        <legend align="center">{{ section.settings.product_list_title | split: '|' | last }}</legend>
+      </fieldset>
+      {% else %}
+      <fieldset class="box-title">
+        <legend align="center">{{ section.settings.product_list_title | split: '|' | first }}</legend>
+      </fieldset>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="widget-product">
+      <div class="products-grid row">
+        {% if section.settings.collection_results_per_row1 != blank and section.settings.collection_results_per_row1 != '5' %}
+          {% assign product_grid = 12 | divided_by: section.settings.collection_results_per_row1 %}
+          {% assign columns = true %}
+        {% endif %}
+        
+        {% assign product_limitation = 0 %}
+        {% if section.settings.display_infinite_scrolling_homepage %}
+        {% assign product_limitation = section.settings.product_list_limit | plus: 0 %}
+        {% endif %}
+        
+        {% for product in collections[section.settings.product_list_collection].products limit:section.settings.product_list_limit_all %}
+          <div class="{% if settings.product_image_border %}grid-item-border{% endif %}{% if settings.product_image_crop %} crop_image{% else %} no_crop_image{% endif %} grid-item col-xs-6 col-sm-4 {% if product_grid == 3 %}col-md-3{% endif %} {% if columns %}col-lg-{{product_grid}}{% else %}col{% endif %}" {% if section.settings.display_infinite_scrolling_homepage and forloop.index > product_limitation %} style="display:none" {% endif %}>
+          {% include 'product-grid-item' %}
+          </div>
+        {% else %}
+        {% for product in (1..section.settings.product_list_limit_all) %}
+         <div class="grid-item col-xs-6 col-sm-4 {% if product_grid == 3 %}col-md-3{% endif %} {% if columns %}col-lg-{{product_grid}}{% else %}col{% endif %}">
+           <div class="grid-view-item no-product">
+             <a href="#" class="grid-view-item__link">
+               <div class="grid-view-item__image">
+                 {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                 {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+               </div>
+               <div class="product-title"><span>Your product's name</span></div>
+              </a>
+              <div class="price-box">
+                <span> $250.00 </span>
+              </div>
+           </div>
+         </div>
+        {% endfor %}
+        {% endfor %}
+     </div>
+     
+      {% assign products_to_show = section.settings.product_list_limit | plus:0 %} 
+      {% if section.settings.display_infinite_scrolling_homepage and section.settings.product_list_collection != bank %}
+      
+      <div class="infinite-scrolling-homepage wow fadeIn">
+        <a href="javascript:void(0)" {% if settings.enable_multilang %}data-translate="home_page.show_more"{% endif %}>{{ 'home_page.show_more' | t }}</a>
+      </div>
+      
+      <script>
+        var productsToShow = {{ products_to_show }};
+        var totalProducts = {{collections[section.settings.product_list_collection].all_products_count}};
+        jQuery(" .{{section.id}} .infinite-scrolling-homepage a").click(function() {
+          if (jQuery('.{{section.id}} .products-grid .grid-item:hidden').length > 0) {
+            jQuery('.{{section.id}} .products-grid .grid-item:hidden:lt('+productsToShow+')').each(function() {
+                jQuery(this).show();
+                {% if settings.product_item_no_hover %}
+                jQuery(this).find('img').css('height','auto');              
+                {% endif %}
+                if (window.product_image_resize) {
+                    jQuery(this).find('img').fakecrop({ 
+                        fill: window.images_size.is_crop,
+                        widthSelector: ".{{section.id}} .products-grid .grid-item:first .product-image",
+                        ratioWrapper: window.images_size
+                    });
+                }
+            });        
+
+            jQuery("window" ).scroll();
+            if (jQuery('.{{section.id}} .products-grid .grid-item:hidden').length == 0) {
+              //no more products
+              var noMoreText = "{{ 'home_page.no_more_product' | t}}";              
+              {% if settings.enable_multilang %}
+              if (translator.isLang2()) 
+                noMoreText = window.lang2.home_page.no_more_product;
+              {% endif %}
+              jQuery(".{{section.id}} .infinite-scrolling-homepage a").text(noMoreText).addClass('disabled');              
+            }
+          }
+        });
+      </script>
+      {% endif %}
+    </div>
+  </div>
+
+{% endif %} 
+{% schema %}
+  {
+    "name": "New Arrivals Products",
+	"class": "index-section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_product_list_home_page",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "collection",
+        "id": "product_list_collection",
+        "label": "Collection to use"
+      },
+      {
+        "type": "text",
+        "id": "product_list_title",
+        "label": "Title",
+        "default": "New Arrivals"
+      },
+      {
+        "type": "text",
+        "id": "product_list_limit_all",
+        "label": "Number of new products to show",
+        "default": "5"
+      },
+      {
+        "type": "checkbox",
+        "id": "display_infinite_scrolling_homepage",
+        "label": "Display Show More Button?",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "product_list_limit",
+        "label": "Number of products to show at one time",
+        "default": "5"
+      },
+      {
+        "type": "select",
+        "id": "collection_results_per_row1",
+        "label": "Products per row",
+        "options": [
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          }
+        ],
+        "default": "5"
+      }
+	],
+	"presets": [
+      {
+        "name": "New Arrivals Products",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}
+
+

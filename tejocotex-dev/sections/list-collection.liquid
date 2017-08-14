@@ -1,0 +1,90 @@
+<header class="page-header">
+  <h2 {% if settings.enable_multilang %}data-translate="collections.general.title"{%endif%}>{{ 'collections.general.title' | t }}</h2>
+</header>
+
+<div class="list-category row">
+  {% comment %}
+    Loop through each collection, except 'frontpage'
+  {% endcomment %}
+  
+  {% for collection in collections %}
+    {% if collection.handle != 'frontpage' and collection.all_products_count > 0 %}
+      {% assign delayTime = 200 | times : forloop.index %}
+      <div class="grid-item wow fadeIn col-xs-12 {% if section.settings.list_collection_results_per_row == "2" %}col-sm-6{% elsif section.settings.list_collection_results_per_row == "3"%}col-sm-4{% elsif section.settings.list_collection_results_per_row == "4"%}col-sm-3{% else %}col{% endif%}" data-wow-delay="{{delayTime}}ms">
+
+        {% comment %}
+          Use capture to put the collection title in a variable that is used in liquid filters
+        {% endcomment %}
+
+        {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+        <div class="product-top">
+          <a href="{{ collection.url }}" title="{{ collection_title }}">
+            {% if collection.image %}
+            {{ collection.image.src | collection_img_url: 'large' | img_tag: collection_title }}
+            {% else %}
+            {{ collection.products.first.featured_image | product_img_url: 'large' | img_tag: collection_title }}
+            {% endif %}
+            <div class="hover"></div>
+          </a>
+          <a href="{{ collection.url }}" class="view">&nbsp;</a>
+        </div>
+        <div class="collection-title-wrapper">
+          <div class="collection-title">
+            <h3 class="h5">
+              <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" {% if settings.enable_multilang %}data-translate="collections.general.link_title|title:{{collection_title}}" translate-item="title"{% endif %}>
+                  {% include 'multilang' with collection.title %}
+              </a>
+            </h3>
+            <p class="count-products" {% if settings.enable_multilang %}data-translate="collections.general.items_with_count|count:{{collection.all_products_count}}"{% endif %}>{{ 'collections.general.items_with_count' | t: count: collection.all_products_count }}</p>
+            <p class="desc">{{ collection.description | strip_html | truncatewords: 14 }}</p>
+     		<p><a href="{{ collection.url }}" class="btn" {% if settings.enable_multilang %}data-translate="collections.general.shop_the_collection"{% endif %}>{{ 'collections.general.shop_the_collection' | t }}</a></p>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "List Collection pages",
+    "settings": [
+	   {
+        "type": "select",
+        "id": "list_collection_results_per_row",
+        "label": "Products per row",
+        "default": "5",
+        "options": [
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          }
+        ]
+      },
+	  {
+		"type": "text",
+		"id": "list_collection_title_size",
+		"label": "Collection Title Font Size",
+		"default": "14"
+	  }
+	]
+  }
+{% endschema %}
+
+<style>
+	.collection-title h5{
+		font-size: {{section.settings.list_collection_title_size}}px;
+	}
+</style>

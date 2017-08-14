@@ -1,0 +1,154 @@
+{% if section.settings.sidebar_recent_art %}
+  {% include 'widget_article' %}
+{% endif %}
+
+{% if section.settings.sidebar_tag %}
+  <div class="widget widget-tags">
+    {% if blog.all_tags.size > 0 %}
+    <div class="widget-title">
+      <h3>
+        <span {% if settings.enable_multilang %}data-translate="blogs.article.tags"{% endif %}>
+          {{ 'blogs.article.tags_title' | t }}
+        </span>
+      </h3>
+    </div>
+    <div class="widget-content">
+      <ul>
+      {% for tag in blog.all_tags %}
+        {% if current_tags contains tag %}
+          <li class="active">{{ tag | link_to_remove_tag: tag }}</li>
+        {% else %}
+          <li>{{ tag | link_to_tag: tag }}</li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'image' %}
+      {% if block.settings.image != blank %}
+        {%- assign img_url = block.settings.image | img_url: '1024x1024' -%}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+
+      <div class="widget sidebar-banner">
+      {% if block.settings.link != blank %}
+        <a href="{{ block.settings.link }}">
+      {% endif %}
+        <img src="{{ img_url }}" alt="">
+      {% if block.settings.link != blank %}
+        </a>
+      {% endif %}
+      </div>
+    {% when 'quote' %}        
+      <div class="widget sidebar-cms-custom">
+        {% if block.settings.title != blank %}
+        <div class="widget-title">
+            <h3>{% include 'multilang' with block.settings.title %}</h3>
+        </div>
+        {% endif %}
+        <div class="widget-content">
+          {% if block.settings.quote != blank %}
+          	 {% if settings.enable_multilang %}
+                <div class="rte-setting lang1">{{ block.settings.quote | split: '|' | first }}</div>
+                <div class="rte-setting lang2">{{ block.settings.quote | split: '|' | last }}</div>
+              {% else %}
+              <div class="rte-setting">{{ block.settings.quote | split: '|' | first }}</div>
+              {% endif %}
+          {% endif %}
+        </div>
+      </div>        
+  {% endcase %}
+{% endfor %}
+<style>
+{% if section.settings.display_sidebar_blog_page %}
+  @media (min-width: 768px) {
+    .template-article .sidebar,
+  	.template-blog .sidebar { display: block!important; }
+  }
+  @media (max-width: 767px) {
+    .template-article .sidebar,
+    .template-blog .sidebar  { display: none; }	
+    .template-article #displayTextLeft,
+    .template-blog #displayTextLeft { display: block; }
+  }
+{% else %}
+   .template-article .sidebar,
+  .template-blog .sidebar  { display: none!important; }
+   .template-article .col-main,
+  .template-blog .col-main { width: 100%!important; }
+  @media (max-width: 767px) {
+     .template-article #displayTextLeft,
+    .template-blog #displayTextLeft { display: none; }
+  }
+{% endif %}
+   </style>
+{% schema %}
+  {
+    "name": "Sidebar",
+    "class": "col-xs-12 col-sm-3 sidebar",
+    "max_blocks": 5,
+    "settings": [
+	  {
+        "type": "checkbox",
+        "id": "display_sidebar_blog_page",
+        "label": "Enable Sidebar",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sidebar_recent_art",
+        "label": "Show Block Recent Article",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sidebar_tag",
+        "label": "Show Block Tag",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Block Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link",
+            "info": "Optional"
+          }
+        ]
+      },
+      {
+        "type": "quote",
+        "name": "Custom Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Custom Block"
+          },
+          {
+            "type": "richtext",
+            "id": "quote",
+            "label": "Text",
+            "default": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

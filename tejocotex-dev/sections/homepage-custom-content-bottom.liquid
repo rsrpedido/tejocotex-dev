@@ -1,0 +1,148 @@
+{% if section.settings.custom-html-in-bottom %}
+<div class="banner-home-bottom container">
+   {% if section.settings.banner_home_bottom_title != blank %}
+  <div class="widget-title wow fadeIn">   
+    {% if settings.enable_multilang %}
+	<fieldset class="box-title lang1">
+      <legend align="center">{{ section.settings.banner_home_bottom_title | split: '|' | first }}</legend>
+    </fieldset>
+	<fieldset class="box-title lang2">
+      <legend align="center">{{ section.settings.banner_home_bottom_title | split: '|' | last }}</legend>
+    </fieldset>
+    {% else %}
+	<fieldset class="box-title">
+      <legend align="center">{{ section.settings.banner_home_bottom_title | split: '|' | first }}</legend>
+    </fieldset>
+    {% endif %}
+  </div>
+  {% endif %}
+  <ul class="row">
+    {% for block in section.blocks %}
+    <li class="col-xs-12 col-sm-4 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load }}ms">
+      <div class="zi-banner">
+        <div class="banner-image  zi-banner-image">
+          <a href="{{ block.settings.custom_bottom_url }}">
+            {% if block.settings.image != blank %}
+            {%- assign img_url = block.settings.image | img_url: '400x' -%}
+           <img src="{{ img_url }}" alt="{{ block.settings.alt_image }}"/>
+             {% else %}	
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </a>
+        </div>
+      </div>
+      <div class="des">
+        {% if block.settings.heading != blank %}			
+        <h4 style="{% if block.settings.heading_size != blank %}font-size: {{ block.settings.heading_size }}px;{% endif %}{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}">{% include 'multilang' with block.settings.heading %}</h4>
+        {% endif %}
+
+        {% if block.settings.custom_bottom_description != blank %}
+        <p style="{% if block.settings.custom_bottom_description_size != blank %}font-size: {{ block.settings.custom_bottom_description_size }}px;{% endif %}{% if block.settings.custom_bottom_description_color != blank %}color: {{ block.settings.custom_bottom_description_color }};{% endif %}">{% include 'multilang' with block.settings.custom_bottom_description %}
+        
+        </p>
+        {% endif %}
+
+        {% if block.settings.custom_bottom_button != blank %}
+        <a class="btn" href="{{ block.settings.custom_bottom_url }}">{% include 'multilang' with block.settings.custom_bottom_button %}
+        <span class="arrow">arrow</span>
+        </a>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Bottom Banner",
+    "class": "index-section",
+	"max_blocks": 6,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "custom-html-in-bottom",
+        "label": "Enable",
+        "default": true
+      },
+	  {
+        "type": "text",
+        "id": "banner_home_bottom_title",
+        "label": "Title",
+        "default": "#Featured on ella"
+      }
+    ],
+    "blocks": [      
+      {
+        "type": "banner",
+        "name": "Banner Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+			"info": "Width: 380px recommended"
+          },
+		  {
+			"type": "text",
+			"id": "heading",
+			"label": "Heading",
+			"default": "Lorem Et Dorus"
+		  },
+		  {
+			"type": "color",
+			"id": "heading_color",
+			"label": "Heading Color",
+			"default": "#000"
+		  },
+		  {
+			"type": "text",
+			"id": "heading_size",
+			"label": "Heading Font Size",
+			"default": "16"
+		  },
+          {
+            "type": "textarea",
+            "id": "custom_bottom_description",
+            "label": "Content Description",
+            "default": "Nullam aliquet vestibulum augue non varius. Cras nec congue elitos. Duis tristique del ante nec aliquam. Praesent urna tellus laoreet an tellus ullamcorper fermentum facilisis eratum."
+          },
+		  {
+            "type": "color",
+            "id": "custom_bottom_description_color",
+            "label": "Content Description Color",
+            "default": "#2d2d2d",
+            "info": "Default Value: #2d2d2d"
+          },
+          {
+            "type": "text",
+            "id": "custom_bottom_description_size",
+            "label": "Content Description Size",
+            "default": "12",
+            "info": "Default Value: 12"
+          },
+		  {
+            "type": "text",
+            "id": "custom_bottom_button",
+            "label": "Button Text",
+            "default": "Shop Now"
+          },
+		  
+          {
+            "type": "url",
+            "id": "custom_bottom_url",
+            "label": "Banner Link 1"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Bottom Banner",
+        "category": "Advanced layout"
+      }
+    ]
+  }
+{% endschema %}
+<style>
+</style>

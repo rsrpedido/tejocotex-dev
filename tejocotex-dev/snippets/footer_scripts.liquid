@@ -1,0 +1,75 @@
+<!-- Footer scripts -->
+{{ 'bootstrap.min.js' | asset_url | script_tag }}  
+{{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+{{ 'owl.carousel.min.js' | asset_url | script_tag }}
+{{ 'jquery.jcarousel.latest.min.js' | asset_url | script_tag }}
+{{ 'jquery.elevateZoom-3.0.8.min.js' | asset_url | script_tag }}
+{{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}
+{{ 'jquery.fakecrop.js' | asset_url | script_tag }}
+{{ 'jquery.countdown.min.js' | asset_url | script_tag }}
+{%  include 'new-currency' %}
+{{ 'jquery.history.js' | asset_url | script_tag }}
+{{ 'ella.js' | asset_url | script_tag }}
+{{ 'slick.min.js' | asset_url | script_tag }}
+{{ 'modernizr.custom.js' | asset_url | script_tag }}
+{{ 'classie.js' | asset_url | script_tag }}
+
+<script>
+  $(document).ready(function() {
+   var body = $('body');
+    var doc = $(document);
+    
+    var showLeftPush = $('#showLeftPush');
+    var nav = $('#cbp-spmenu-s1');
+    
+    showLeftPush.on('click', function(e) {
+      e.stopPropagation();
+    
+      body.toggleClass('cbp-spmenu-push-toright');
+      nav.toggleClass('cbp-spmenu-open');
+      showLeftPush.toggleClass('active');
+    });
+    
+    $('.gf-menu-device-wrapper .close-menu').on('click', function() {
+    	showLeftPush.trigger('click');
+    });
+    
+    doc.on('click', function(e) {
+      if (!$(e.target).closest('#cbp-spmenu-s1').length && showLeftPush.hasClass('active')) {
+        showLeftPush.trigger('click');
+      }        
+    });
+  });
+</script>
+
+{% if settings.enable_lazy_loading_pc or settings.enable_lazy_loading_mobile %}
+{{ 'wow.min.js' | asset_url | script_tag }}
+{% endif %}
+
+<script>
+function isMobileFunc() { 
+    var userAgent = navigator.userAgent.toLowerCase();   
+    var phone = (/iphone|android|ipod|blackberry|opera mini|opera mobi|skyfire|maemo|windows phone|palm|iemobile|symbian|symbianos|fennec/i.test(userAgent));
+    var tablet = (/ipad|sch-i800|playbook|tablet|kindle|gt-p1000|sgh-t849|shw-m180s|a510|a511|a100|dell streak|silk/i.test(userAgent));
+    return phone || tablet;
+}
+var enable_lazy_loading_pc = {{settings.enable_lazy_loading_pc}};
+var enable_lazy_loading_mobile = {{settings.enable_lazy_loading_mobile}};
+var isMobile = isMobileFunc();
+
+if ((enable_lazy_loading_pc && !isMobile) || (enable_lazy_loading_mobile && isMobile)) {
+	new WOW().init({offset:50});
+}
+  
+if (isMobile) {
+  var currentEl;
+  jQuery('.site-nav .dropdown > a').bind('click', function(event) {
+      if (currentEl != this) {
+          event.preventDefault();
+          currentEl = this;
+      }
+  });
+}
+</script>
+

@@ -1,0 +1,14 @@
+<ul class="site-nav-dropdown">
+  {% for link_child_item in linklists[link_child].links %}
+  <li {% if linklists[link_child_item.handle] != empty %}class="dropdown"{% endif %}>
+    <a {% if linklists[link_child_item.handle] != empty %}class="menu__moblie"{% endif %} href="{{ link_child_item.url }}">
+      {% include 'multilang' with link_child_item.title %}
+      {% if linklists[link_child_item.handle] != empty and settings.show_dropdown_arrow %}<span class="icon-dropdown"></span>{% endif %}
+    </a>
+    {% if linklists[link_child_item.handle] != empty %}
+      {% assign link_child = link_child_item.handle %}
+      {% include 'dropdown-menu' with link_child %}
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

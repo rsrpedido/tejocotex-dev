@@ -1,0 +1,33 @@
+
+{% if sectioncollection_results_per_page != blank %}
+  {% assign product_per_page = section.collection_results_per_page %}
+{% else %}
+  {% assign product_per_page = 12 %}
+{% endif %}
+
+    
+  {% paginate collection.products by product_per_page %}
+  {% include 'toolbar-list' %}
+
+ <div class="product-list">
+      {% comment %}
+        Loop through our products in the current collection.
+        See the snippet 'product-grid-item' for the layout.
+      {% endcomment %}
+      {% if collection.products.size > 0 %}
+        {% for product in collection.products %}
+        {% include 'product-list-item' %}
+        {% endfor %}
+      {% else %}
+      <p class="text-center" {% if settings.enable_multilang %}data-translate="collections.general.no_matches"{%endif%}>{{ 'collections.general.no_matches' | t }}</p>
+      {% endif %}
+    </div>
+  
+  {% if paginate.pages > 1 %}
+  <div class="padding">
+    {% include 'pagination-page' %}
+  </div>
+  {% endif %}
+
+  {% endpaginate %}    
+

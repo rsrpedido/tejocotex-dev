@@ -1,0 +1,18 @@
+{% include 'breadcrumb' %}
+<div class="row">
+  {% if settings.display_sidebar_cat_page %}
+   {% section 'sidebar' %}
+  {% endif %}
+ 
+  <div class="block-row col-main {% if settings.display_sidebar_cat_page %}col-xs-9{% endif %}">
+      
+    {% section 'collection-header' %}
+    {% section 'collection-template' %}
+     
+    
+  </div>
+</div>
+
+{% section 'recently-viewed-products' %}
+
+

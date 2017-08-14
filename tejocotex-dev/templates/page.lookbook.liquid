@@ -1,0 +1,16 @@
+{% include 'breadcrumb' %}
+<header class="page-header">
+  {% if settings.enable_multilang %}
+  <h2 class="lang1">{{ page.title | split: '|' | first }}</h2>
+  <h2 class="lang2">{{ page.title | split: '|' | last }}</h2>
+  {% else %}
+  <h2>{{ page.title | split: '|' | first }}</h2>   
+  {% endif %}  
+</header>
+
+{% comment %}
+  Regular page content goes here.
+{% endcomment %}
+<div class="rte">
+  {% section 'lookbook'%}
+</div>

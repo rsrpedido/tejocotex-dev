@@ -1,0 +1,227 @@
+{{ 'instafeed.min.js' | asset_url | script_tag }}
+{% if section.settings.show_instagram %}
+<section class="home-instagram wow fadeIn" data-wow-delay="{{ settings.time_lazy_load }}ms">
+  <div class="container">
+    <div class="widget-title">   
+      {% if section.settings.instagram_title != blank %}
+        {% if settings.enable_multilang %}
+        <h3 class="lang1">{{ section.settings.instagram_title | split: '|' | first }}</h3>
+        <h3 class="lang2">{{ section.settings.instagram_title | split: '|' | last }}</h3>
+        {% else %}
+        <h3>{{ section.settings.instagram_title | split: '|' | first }}</h3>
+        {% endif %}
+      {% endif %}
+      
+      {% if section.settings.instagram_des != blank %}
+        {% if settings.enable_multilang %}
+        <p class="instagram-des lang1"><span>&nbsp;</span>{{ section.settings.instagram_des | split: '|' | first }}</p>
+        <p class="instagram-des lang2"><span>&nbsp;</span>{{ section.settings.instagram_des | split: '|' | last }}</p>
+        {% else %}
+        <p class="instagram-des"><span>&nbsp;</span>{{ section.settings.instagram_des | split: '|' | first }}</p>
+        {% endif %}
+      {% endif %}
+    </div>
+    
+    <div id="instafeed" class="row owl-carousel"></div>  
+    {% if section.settings.display_instagram_button and section.settings.instagram_button_text != blank %}
+      {% if settings.enable_multilang %}
+      <a href="{{ section.settings.instagram_button_link }}" title="{{ section.settings.instagram_button_text | split: '|' | first }}" class="btn lang1">
+        {{ section.settings.instagram_button_text | split: '|' | first }}<span class="arrow">arrow</span>
+      </a>    
+      <a href="{{ section.settings.instagram_button_link }}" title="{{ section.settings.instagram_button_text | split: '|' | last }}" class="btn lang2">
+        {{ section.settings.instagram_button_text | split: '|' | last }}<span class="arrow">arrow</span>
+      </a>
+      {% else %}
+      <a href="{{ section.settings.instagram_button_link }}" title="{{ section.settings.instagram_button_text | split: '|' | first }}" class="btn">
+        {{ section.settings.instagram_button_text | split: '|' | first }}<span class="arrow">arrow</span>
+      </a> 
+      {% endif %}
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  jQuery(document).ready(function(){
+    var feed = new Instafeed({
+      get: "{{ section.settings.instagram_get }}",    
+      {% if section.settings.instagram_tag != blank %} tagName: "{{ section.settings.instagram_tag }}", {% endif %}
+      {% if settings.locationId != blank %} locationId: "{{ section.settings.instagram_locationId }}", {% endif %}
+      {% if section.settings.user-id != blank %} userId: {{ section.settings.user-id }}, {% endif %}
+      {% if section.settings.accessToken != blank %}accessToken: '{{ section.settings.accessToken }}', {% endif %}
+      resolution: "{{ section.settings.resolution_images }}",
+      clientId: "{{ section.settings.client-id }}",
+      limit: "{{ section.settings.limit }}",
+      after: function() {
+        jQuery("#instafeed a").attr("target","_blank");
+        jQuery("#instafeed").owlCarousel({
+          navigation : true,
+          items: {{ section.settings.images_per_row }},
+          itemsTablet: [768,3],
+          itemsTabletSmall: [650,2]
+        });
+      }
+    });
+    feed.run();
+  });
+</script>
+{% endif %}
+{% schema %}
+  {
+    "name": "Instagram",
+	"class": "index-section",
+    "settings": [
+	
+      {
+        "type": "checkbox",
+        "id": "show_instagram",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "instagram_bg_color",
+        "label": "Background color",
+        "default": "#fff8ee"
+      },
+      {
+        "type": "text",
+        "id": "instagram_title",
+        "label": "Title",
+        "default": "#Ella On Instagram"
+      },
+      {
+        "type": "text",
+        "id": "instagram_des",
+        "label": "Instagram Description",
+        "default": "Phasellus lorem malesuada ligula pulvinar commodo maecenas suscipit auctom."
+      },
+      {
+        "type": "checkbox",
+        "id": "display_instagram_button",
+        "label": "Display Button Instagram?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "instagram_button_text",
+        "label": "Button Instagram Text",
+        "default": "View Gallery"
+      },
+      {
+        "type": "text",
+        "id": "instagram_button_link",
+        "label": "Button Instagram Link"
+      },
+      {
+        "type": "select",
+        "id": "instagram_get",
+        "label": "Get Image from",
+        "options": [
+          {
+            "value": "popular",
+            "label": "Popular"
+          },
+          {
+            "value": "tagged",
+            "label": "Tagged"
+          },
+          {
+            "value": "location",
+            "label": "Location"
+          },
+          {
+            "value": "user",
+            "label": "User"
+          }
+        ],
+        "default": "popular"
+      },
+      {
+        "type": "text",
+        "id": "client-id",
+        "label": "Client Id",
+        "default": "c6e4c736e82345a3898a0e299daa00fb",
+        "info": "[Where do I find Client ID?](http:\/\/darkwhispering.com\/how-to\/get-a-instagram-client_id-key)"
+      },
+      {
+        "type": "text",
+        "id": "instagram_tag",
+        "label": "Tag Name",
+        "info": "Use when Get Image from: 'Tagged'."
+      },
+      {
+        "type": "text",
+        "id": "instagram_locationId",
+        "label": "Location ID",
+        "info": "Use when Get Image from: 'Location'."
+      },
+      {
+        "type": "text",
+        "id": "user-id",
+        "label": "User Id",
+        "default": "1599696966",
+        "info": "Use when Get Image from: 'User'. [Where do I find User ID and Access Token?](http:\/\/www.pinceladasdaweb.com.br\/instagram\/access-token\/)"
+      },
+      {
+        "type": "text",
+        "id": "accessToken",
+        "label": "Access Token",
+        "default": "1599696966.467ede5.0995bcf2188e4607bd092f5b29edaf99",
+        "info": "Required to use when Get Image from: 'User'."
+      },
+      {
+        "type": "text",
+        "id": "limit",
+        "label": "Limit the number of images to show",
+        "default": "10"
+      },
+      {
+        "type": "select",
+        "id": "images_per_row",
+        "label": "Images per row",
+        "options": [
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "resolution_images",
+        "label": "Resolution of images",
+        "options": [
+          {
+            "value": "thumbnail",
+            "label": "Thumbnail"
+          },
+          {
+            "value": "low_resolution",
+            "label": "Low Resolution"
+          },
+          {
+            "value": "standard_resolution",
+            "label": "Standard Resolution"
+          }
+        ]
+      }
+	],
+	"presets": [
+          {
+            "name": "Instagram",
+            "category": "Instagram"
+          }
+        ]
+  }
+{% endschema %}
+<style>
+.home-instagram { background-color: {{ section.settings.instagram_bg_color }}; }
+</style>

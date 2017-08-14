@@ -1,0 +1,566 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+        <div class="row">
+          <div class="col-1 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load }}ms">
+            {% if section.settings.footer_title_1 != blank %}
+              <h3>{% include 'multilang' with section.settings.footer_title_1 %}</h3>
+            {% endif %}
+            {%- assign footer_linklist = section.settings.footer_linklist -%}
+            {% if linklists[footer_linklist].links.size > 0 %}
+              <ul>
+                {% for link in linklists[footer_linklist].links %}
+                  <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="col-2 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 2 }}ms">
+            {% if section.settings.footer_title_2 != blank %}
+              <h3>{% include 'multilang' with section.settings.footer_title_2 %}</h3>
+            {% endif %}
+            {%- assign footer_linklist_2 = section.settings.footer_linklist_2 -%}
+            {% if linklists[footer_linklist_2].links.size > 0 %}
+              <ul>
+                {% for link in linklists[footer_linklist_2].links %}
+                  <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="col-3 wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 3 }}ms">
+            {% if section.settings.footer_title_3 != blank %}
+              <h3>{% include 'multilang' with section.settings.footer_title_3 %}</h3>
+            {% endif %}
+            {%- assign footer_linklist_3 = section.settings.footer_linklist_3 -%}
+            {% if linklists[footer_linklist_3].links.size > 0 %}
+              <ul>
+                {% for link in linklists[footer_linklist_3].links %}
+                  <li><a href="{{ link.url}}">{% include 'multilang' with link.title %}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <div class="col-4 wow fadeInUp last" data-wow-delay="{{ settings.time_lazy_load | times: 5 }}ms">
+            {% if section.settings.footer_social_enable %}
+            <div class="footer-social">
+              {% if section.settings.footer_social_title != blank %}
+              <h3>{% include 'multilang' with section.settings.footer_social_title %}</h3>
+               {% endif %}
+              {% include 'social-media' %}
+            </div>
+            {% endif %}
+            {% if section.settings.footer_newsletter_enable %}
+            <div class="footer-newsletter">
+              <h3 >{% include 'multilang' with section.settings.footer_newsletter_text %}</h3>
+              {% include 'homepage-block-newsletter' %}
+            </div>
+            {% endif %}
+          </div>
+
+        </div>
+    </div>
+
+    {%- assign footerLink = section.settings.footer_link -%}
+    {% if section.settings.footer_address_code != blank or linklists[footerLink].links.size > 0 %}
+    <div class="footer-bottom  wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load | times: 5 }}ms">
+          {% if section.settings.footer_address_code != blank %}
+            <address>
+              {% if settings.enable_multilang %}
+              <div class="lang1">{{ section.settings.footer_address_code | split: '[lang2]' | first }}</div>
+              <div class="lang2">{{ section.settings.footer_address_code | split: '[lang2]' | last }}</div>
+              {% else %}
+              {{ section.settings.footer_address_code | split: '|' | first }}
+              {% endif %}
+            </address>
+          {% endif %}
+        {% if section.settings.show_payment_icons %}
+          {% assign payment_string = 'visa,visa_electron,master,maestro,american_express,solo,paypal,amazon_payments,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,stripe' %}
+          {% assign methods = payment_string | split: ',' %}
+
+          <ul class="payment-methods">	
+            {% for method in methods %}
+              {%- assign display_current_method = method | prepend: 'payment_display_' -%}
+              {% if section.settings[display_current_method] %}
+                {%- assign current_method_icon = method | prepend: 'icon_' -%}
+                <li><img src="{{ section.settings[current_method_icon] | img_url: '66x22' }}" alt="{{ method }}"></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</footer>
+{% include 'message-modal' %}
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+	{
+        "type": "header",
+        "content": "Footer Background"
+      },
+      {
+        "type": "radio",
+        "id": "bg_footer_img",
+        "label": "Background image",
+        "options": [
+          {
+            "value": "bg-footer",
+            "label": "Uploaded image"
+          },
+          {
+            "value": "none",
+            "label": "Solid color (no image)"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "bg_footer_color",
+        "label": "Background color",
+        "default": "#141414"
+      },
+      {
+        "type": "radio",
+        "id": "bg_footer_position_x",
+        "label": "Horizontal position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "radio",
+        "id": "bg_footer_position_y",
+        "label": "Vertical position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "bg_footer_repeat",
+        "label": "Repeat",
+        "options": [
+          {
+            "value": "repeat",
+            "label": "Horizontally and vertically"
+          },
+          {
+            "value": "repeat-x",
+            "label": "Horizontally only"
+          },
+          {
+            "value": "repeat-y",
+            "label": "Vertically only"
+          },
+          {
+            "value": "no-repeat",
+            "label": "Don't repeat"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "bg_footer_attachment",
+        "label": "Attachment",
+        "options": [
+          {
+            "value": "scroll",
+            "label": "Scroll"
+          },
+          {
+            "value": "fixed",
+            "label": "Fixed"
+          }
+        ]
+      },
+      {
+        "type": "image_picker",
+        "id": "bg-footer-img",
+       "label": "Upload a new image"
+      },
+      {
+        "type": "header",
+        "content": "Footer Line Color "
+      },
+      {
+        "type": "color",
+        "id": "bg_footer_line_color",
+        "label": "Footer Line Color",
+        "default": "#282828"
+      },
+      {
+        "type": "header",
+        "content": "Text Color"
+      },
+      {
+        "type": "color",
+        "id": "footer_title_color",
+        "label": "Footer Title",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "footer_link_color",
+        "label": "Footer Text",
+        "default": "#969696"
+      },
+      {
+        "type": "header",
+        "content": "Footer Column"
+      },
+      {
+        "type": "text",
+        "id": "footer_title_1",
+        "label": "Footer 1 Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist",
+        "label": "Footer Column 1",
+        "default": "footer"
+      },
+      {
+        "type": "text",
+        "id": "footer_title_2",
+        "label": "Footer 2 Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_2",
+        "label": "Footer Column 2"
+      },
+      {
+        "type": "text",
+        "id": "footer_title_3",
+        "label": "Footer 3 Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_3",
+        "label": "Footer Column 3"
+      },
+	  {
+        "type": "header",
+        "content": "Social"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_social_enable",
+        "label": "Show social media links?",
+        "default": false
+      },
+	  {
+        "type": "text",
+        "id": "footer_social_title",
+        "label": "Footer Social Title"
+      },
+ 	  {
+        "type": "textarea",
+        "id": "fb_like_code",
+        "label": "Facebook Like Code"
+      },
+	 {
+        "type": "header",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_newsletter_enable",
+        "label": "Show newsletter signup?",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "footer_newsletter_text",
+        "label": "Footer Newsletter Text"
+      },
+	 
+      {
+        "type": "header",
+        "content": "Footer Address"
+      },
+      {
+        "type": "textarea",
+        "id": "footer_address_code",
+        "label": "Footer Address Code"
+      },
+      
+      {
+        "type": "header",
+        "content": "Footer Payment"
+      },
+		 {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": false
+      },
+ 	 {
+        "type": "header",
+        "content": "Display payment icons for"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_visa",
+        "label": "Visa"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_visa_electron",
+        "label": "Visa Electron"
+      },
+	  {
+        "type": "checkbox",
+        "id": "payment_display_american_express",
+        "label": "American Express"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_master",
+        "label": "Master"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_maestro",
+        "label": "Maestro"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_solo",
+        "label": "Solo"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_paypal",
+        "label": "Paypal"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_amazon_payments",
+        "label": "Amazon Payments"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_apple_pay",
+        "label": "Apple Pay"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_bitcoin",
+        "label": "Bitcoin"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_cirrus",
+        "label": "Cirrus"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_dankort",
+        "label": "Dankort"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_diners_club",
+        "label": "Diners Club"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_discover",
+        "label": "Discover"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_dogecoin",
+        "label": "Dogecoin"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_dwolla",
+        "label": "Dwolla"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_forbrugsforeningen",
+        "label": "Forbrugsforeningen"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_interac",
+        "label": "Interac"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_jcb",
+        "label": "JCB"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_litecoin",
+        "label": "Litecoin"
+      },
+      {
+        "type": "checkbox",
+        "id": "payment_display_stripe",
+        "label": "Stripe"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_visa",
+        "label": "Visa image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_visa_electron",
+        "label": "Visa Electron image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_master",
+        "label": "Master image"
+      },
+	  {
+        "type": "image_picker",
+        "id": "icon_american_express",
+        "label": "American Express image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_maestro",
+        "label": "Maestro image"
+      },
+     
+      {
+        "type": "image_picker",
+        "id": "icon_solo",
+        "label": "Solo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_paypal",
+        "label": "Paypal image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_amazon_payments",
+        "label": "Amazon Payments image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_apple_pay",
+        "label": "Apple Pay image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_bitcoin",
+        "label": "Bitcoin image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_cirrus",
+        "label": "Cirrus image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_dankort",
+        "label": "Dankort image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_diners_club",
+        "label": "Diners Club image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_discover",
+        "label": "Discover image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_dogecoin",
+        "label": "Dogecoin image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_dwolla",
+        "label": "Dwolla image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_forbrugsforeningen",
+        "label": "Forbrugsforeningen image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_interac",
+        "label": "Interac image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_jcb",
+        "label": "JCB image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_litecoin",
+        "label": "Litecoin image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon_stripe",
+        "label": "Stripe image"
+      }
+    ]
+  }
+{% endschema %}
+<style>
+.site-footer {
+   {% if section.settings.bg_footer_color != '' %}
+    background: {{ section.settings.bg_footer_color }};
+  {% endif %}
+	{% if section.settings.bg_footer_img == 'bg-footer' %}
+		background: url({{ section.settings.bg-footer-img | img_url: '2048x' }});;
+	{% elsif settings.bg_footer_img != 'none' %}
+		background: url({{ section.settings.bg_footer_img | asset_url }});
+	{% endif %}
+	background-position: {{ section.settings.bg_footer_position_x }} {{ section.settings.bg_footer_position_y }};
+	background-repeat: {{ section.settings.bg_footer_repeat }};
+	background-attachment: {{ section.settings.bg_footer_attachment }};
+}
+.footer-bottom { border-color: {{ section.settings.bg_footer_line_color }}; }
+.site-footer .text span,
+.footer-top h3 { color: {{ section.settings.footer_title_color }}; }
+.site-footer a,
+.footer-bottom address {color: {{ section.settings.footer_link_color }};}
+.site-footer a:hover { color: {{ section.settings.footer_title_color }}; }
+.site-footer .col-1 a:hover,
+.site-footer .col-2 a:hover,
+.site-footer .col-3 a:hover { border-bottom: 1px solid {{ section.settings.footer_title_color }}; }
+  </style>

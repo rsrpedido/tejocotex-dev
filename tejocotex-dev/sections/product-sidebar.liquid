@@ -1,0 +1,270 @@
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'menu' %}
+	{% if block.settings.enable %}
+      <div class="widget sidebar-links no-ajax">
+          {% if block.settings.title != blank %}
+          <div class="widget-title">
+            <h3>{% include 'multilang' with block.settings.title %}</h3>
+          </div>
+          {% endif %}
+          <div class="widget-content">
+              <ul>
+                {% if block.settings.style_categories == 'style_show_all' %}
+                  {% for category in collections %}
+                    <li>
+                      <a href="{{ category.url }}" {% if collection.handle == category.handle %}class="active"{% endif %}>              
+                        {% include 'multilang' with category.title %}
+                      </a>
+                    </li>     
+                  {% endfor %}
+                  {% else %}
+
+                  {% assign items = block.settings.categories_items | split:"," | strip | downcase %}
+                  {% for category in collections %}
+                  {% assign cat = category.title | downcase %}
+                  {% if items contains cat %}
+                  <li>
+                    <a href="{{ category.url }}" {% if collection.handle == category.handle %}class="active"{% endif %}>              
+                      {% include 'multilang' with category.title %}
+                    </a>
+                  </li>     
+                  {% endif %}
+                  {% endfor %}
+                {% endif %}
+              </ul>
+          </div>
+        </div>
+	{% endif %}
+    {% when 'image' %}
+	{% if block.settings.enable %}	
+      {% if block.settings.image != blank %}
+        {%- assign img_url = block.settings.image | img_url: '1024x1024' -%}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+
+      <div class="widget sidebar-banner">
+      {% if block.settings.link != blank %}
+        <a href="{{ block.settings.link }}">
+      {% endif %}
+        <img src="{{ img_url }}" alt="">
+      {% if block.settings.link != blank %}
+        </a>
+      {% endif %}
+      </div>
+	{% endif %}
+	{% when 'product' %}
+	{% if block.settings.enable %}	
+      <div class="widget widget-product" id="block-{{ block.id }}">
+        {% if block.settings.title != blank %}
+        <div class="widget-title">   
+          <h3>{% include 'multilang' with block.settings.title %}</h3>
+        </div>
+        {% endif %}
+        {% if block.settings.collection == blank %}
+         <div class="grid-view-item no-product" style ="margin: 0 0 30px;">
+             <a href="#" class="center">
+               <div class="grid-view-item__image">
+                 {% capture current %}{% cycle 2 %}{% endcapture %}
+                 {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+               </div>
+               <div class="product-title"><span>Your product's name</span></div>
+               </a>
+             <div class="center">
+              <span> $200.00 </span>
+             </div>
+           </div>
+        {% else %}
+          <div class="widget-inner">
+            <div class="products-grid owl-carousel">
+            {% for product in collections[block.settings.collection].products limit:block.settings.limit %}
+              <div class="{% if settings.product_image_border %}grid-item-border {% endif %}grid-item">
+                {% include 'product-grid-item-sidebar', grid_image_width: '128x' %}
+              </div>
+            {% endfor %}
+            </div> 
+          </div>
+        {% endif %}
+      </div>
+	 
+      <script>
+      jQuery(document).ready(function() {
+        jQuery("#block-{{ block.id }} .products-grid").owlCarousel({
+          pagination: false,
+          navigation: true,
+          singleItem: true
+        });
+      });
+      </script>
+	{% endif %}
+    {% when 'quote' %}    
+	{% if block.settings.enable %}	
+      <div class="widget sidebar-cms-custom">
+        {% if block.settings.title != blank %}
+        <div class="widget-title">
+          <h3>{% include 'multilang' with block.settings.title | escape  %}</h3>
+        </div>
+        {% endif %}
+        <div class="widget-content">
+          {% if block.settings.quote != blank %}
+          	 {% if settings.enable_multilang %}
+                <div class="rte-setting lang1">{{ block.settings.quote | split: '|' | first }}</div>
+                <div class="rte-setting lang2">{{ block.settings.quote | split: '|' | last }}</div>
+              {% else %}
+              <div class="rte-setting">{{ block.settings.quote | split: '|' | first }}</div>
+              {% endif %}
+          {% endif %}
+        </div>
+      </div>  
+	{% endif %}
+  {% endcase %}
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Product Sidebar",
+    "class": "col-xs-12 col-sm-3 sidebar",
+    "max_blocks": 10,
+ 	"settings": [
+	  {
+        "type": "checkbox",
+        "id": "display_sidebar_detail_page",
+        "label": "Enable Sidebar",
+        "default": true
+      }
+	],
+    "blocks": [
+       {
+        "type": "menu",
+        "name": "Categories",
+        "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+        "type": "radio",
+        "id": "style_categories",
+        "label": "Show all \/ Only a few categories",
+        "options": [
+          {
+            "value": "style_show_all",
+            "label": "Show all"
+          },
+          {
+            "value": "style_little",
+            "label": "Only a few categories"
+          }
+        ]
+      },
+      {
+        "type": "textarea",
+        "id": "categories_items",
+        "label": "List of categories",
+        "info": "Use \",\" to separate categories items if you have multiple categories. For ex: Shop, Collections"
+      }
+        ]
+      },
+      {
+        "type": "product",
+        "name": "Product Slider",
+        "settings": [
+		  {
+          "type": "checkbox",
+          "id": "enable",
+          "label": "Enable",
+          "default": true
+     	  },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "id": "collection",
+            "type": "collection",
+            "label": "Collection"
+          },
+          {
+            "type": "text",
+            "id": "limit",
+            "label": "Number of products to show",
+            "default": "8"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "name": "Block Image",
+        "settings": [
+		  {
+          "type": "checkbox",
+          "id": "enable",
+          "label": "Enable",
+          "default": true
+     	  },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link",
+            "info": "Optional"
+          }
+        ]
+      },
+      {
+        "type": "quote",
+        "name": "Custom Block",
+        "settings": [
+		  {
+          "type": "checkbox",
+          "id": "enable",
+          "label": "Enable",
+          "default": true
+     	  },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Custom Block"
+          },
+          {
+            "type": "richtext",
+            "id": "quote",
+            "label": "Text",
+            "default": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+<style>
+{% if section.settings.display_sidebar_detail_page %}
+  @media (min-width: 768px) {
+  	.template-product .sidebar { display: block!important; }
+  }
+  @media (max-width: 767px) {
+    .template-collection .sidebar { display: none; }	
+    .template-product #displayTextLeft { display: block; }
+  }
+{% else %}
+  .template-product .sidebar { display: none!important; }
+  .template-product .col-main { width: 100%!important; }
+  @media (max-width: 767px) {
+    .template-product #displayTextLeft { display: none; }
+  }
+{% endif %}
+</style>

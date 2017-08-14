@@ -1,0 +1,86 @@
+
+{% if section.settings.collection_results_per_page != blank %}
+  {% assign product_per_page = section.settings.collection_results_per_page %}
+{% else %}
+  {% assign product_per_page = 12 %}
+{% endif %}
+
+    
+  {% paginate collection.products by product_per_page %}
+  {% include 'toolbar' %}
+  
+   {% case section.settings.collection_results_per_row %}
+  {% when '2' %}
+    {%- assign grid_item_width = '' -%}
+    {%- assign image_size = '600x600' -%}
+  {% when '3' %}
+    {%- assign grid_item_width = 'col-md-4' -%}
+    {%- assign image_size = '550x550' -%}
+  {% when '4' %}
+    {%- assign grid_item_width = 'col-md-3' -%}
+    {%- assign image_size = '250x' -%}
+  {% when '5' %}
+    {%- assign grid_item_width = 'col' -%}
+    {%- assign image_size = '195x' -%}
+  {% endcase %}
+
+     <div class="product-collection products-grid row">
+       {% if collection.products_count > 0 %}    
+          {% for product in collection.products %}
+          <div class="{% if settings.product_image_border%}grid-item-border {% endif %}{% if settings.product_image_crop%}crop_image {% else %}no_crop_image {% endif %} grid-item col-xs-6 {{ grid_item_width }}">
+            {% include 'product-grid-item', grid_image_width: image_size %}
+          </div>
+          {% endfor %}
+        {% else %}
+        <p class="text-center" {% if settings.enable_multilang %}data-translate="collections.general.no_matches"{% endif %}>{{ 'collections.general.no_matches' | t }}</p>
+        {% endif %}
+      </div>
+     {% if paginate.pages > 1 %}
+      <div class="padding">
+        {% include 'pagination-page' %}
+      </div>
+    {% endif %}
+  {% endpaginate %}    
+
+ 
+
+{% schema %}
+  {
+    "name": "Collection pages",
+    "settings": [
+      {
+        "type": "select",
+        "id": "collection_results_per_row",
+        "label": "Products per row (grid only)",
+        "default": "4",
+        "options": [
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "collection_results_per_page",
+        "label": "Products per page  (grid only) ",
+        "default": "12"
+      }
+     
+      
+    ]
+  }
+{% endschema %}
+
