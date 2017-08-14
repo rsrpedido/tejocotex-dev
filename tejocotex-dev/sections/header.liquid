@@ -25,11 +25,11 @@
       jQuery('.header-top a.close').bind('click',function(){
         jQuery('.header-top').remove();
         jQuery.cookie('headerTop', 'closed', {expires:1, path:'/'});
-      });  
+      });
   </script>
     {% endif %}
   {% endif %}
-  
+
   <div class="header-bottom">
     <div class="container">
 
@@ -38,7 +38,7 @@
           <div id="showLeftPush">
           <i class="fa fa-bars" aria-hidden="true"></i>
           </div>
-        </div><!-- end Navigation Mobile  --> 
+        </div><!-- end Navigation Mobile  -->
 
         <div class="customer-area dropdown">
           <a data-toggle="dropdown" href="#">
@@ -58,13 +58,13 @@
       </div>
 
       <div class="header-panel-top">
-        <div class="nav-search on">
+        <!-- <div class="nav-search on">
             {% if section.settings.show_header_search %}
             {% include 'search-bar' %}
             {% endif %}
-          </div>
+          </div> -->
         <div class="currency">{% include 'new-currency-picker' %}</div>
-        
+
         {% if settings.enable_multilang %}
         <div class="lang-block">
           <select id="lang-switcher">
@@ -74,14 +74,14 @@
         </div>
         <script>
           translator.updateLangSwitcher();
-          jQuery('#lang-switcher').selectize();          
+          jQuery('#lang-switcher').selectize();
         </script>
-        <style>        
-        .selectize-control div[data-value~="1"] {background: url({{ "i-lang-1.png" | asset_url }}) no-repeat;}        
-        .selectize-control div[data-value~="2"] {background: url({{ "i-lang-2.png" | asset_url }}) no-repeat;}        
+        <style>
+        .selectize-control div[data-value~="1"] {background: url({{ "i-lang-1.png" | asset_url }}) no-repeat;}
+        .selectize-control div[data-value~="2"] {background: url({{ "i-lang-2.png" | asset_url }}) no-repeat;}
         </style>
         {% endif %}
-        
+
         {% if section.settings.display_header_text_order and section.settings.header_text_order != blank %}
           {% if settings.enable_multilang %}
             <p class="text_order">
@@ -93,20 +93,20 @@
           {% endif %}
         {% endif %}
       </div>
-      
+
       <div class="header-panel">
         <div class="row">
           <h1 class="header-logo col-xs-12 col-sm-4">
             {% if section.settings.brand_type == 'image' %}
             <a href="/">
-               {% if section.settings.logo != bank %} 
+               {% if section.settings.logo != bank %}
               <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ section.settings.logo.alt | default: shop.name }}" itemprop="logo">
               {% else %}
                 <a class="logo-title" href="/">{{shop.name}}</a>
               {% endif %}
-              {% if section.settings.enable_retina %} 
+              {% if section.settings.enable_retina %}
               <img src="{{ section.settings.logo_2x | img_url: 'master' }}" alt="{{ section.settings.logo_2x.alt | default: shop.name }}" itemprop="logo">
-              
+
               {% endif %}
             </a>
             {% elsif section.settings.brand_text != "" %}
@@ -135,15 +135,15 @@
                   <a href="javascript:void(0)" id="cartToggle">
                     <span class="first" {% if settings.enable_multilang %}data-translate="cart.general.shopping_cart"{% endif %}>{{ 'cart.general.shopping_cart' | t }}</span>
                     <span id="cartCount">{{ cart.item_count }}</span>
-                  </a> 
+                  </a>
                 </p>
-                <div id="dropdown-cart" style="display:none"> 
+                <div id="dropdown-cart" style="display:none">
                   <div class="no-items">
                       <p {% if settings.enable_multilang %}data-translate="cart.general.empty"{% endif %} >{{ 'cart.general.empty' | t }}</p>
                     <p class="text-continue"><a href="javascript:void(0)" {% if settings.enable_multilang %}data-translate="cart.ajax_cart.continue_shopping"{% endif %}>{{ 'cart.ajax_cart.continue_shopping' | t }}</a></p>
                   </div>
                   <div class="has-items">
-                    <ol class="mini-products-list">  
+                    <ol class="mini-products-list">
                       {% for item in cart.items %}
                       <li class="item" id="cart-item-{{item.id}}">
                         <a href="{{item.url}}" class="product-image">
@@ -173,10 +173,10 @@
                       </li>
                       {% endfor %}
                     </ol>
-                    <div class="summary">                
+                    <div class="summary">
                       <p class="total">
                         <span class="label"><span {% if settings.enable_multilang %}data-translate="cart.label.total"{% endif %}>{{ 'cart.label.total' | t }}</span>:</span>
-                        <span class="price">{{cart.total_price | money}}</span> 
+                        <span class="price">{{cart.total_price | money}}</span>
                       </p>
                     </div>
                     <div class="actions">
@@ -190,7 +190,7 @@
               {% comment %}
               If customer accounts are enabled, provide login and create account links
               {% endcomment %}
-            </div> <!-- End Top Header --> 
+            </div> <!-- End Top Header -->
           </div>
           <div class="nav-search on">
             {% if section.settings.show_header_search %}
@@ -198,10 +198,10 @@
             {% endif %}
           </div>
         </div>
-		
+
       </div>
     </div>
-	
+
   </div>
 </header>
 {% if settings.enable_multilang %}
@@ -416,8 +416,8 @@
 .header-bottom { background: {{ section.settings.bg_header_bottom_color }}; }
 .site-header p.text_order { color: {{ section.settings.header_text_order_text_color }}; }
 .header-bottom .search-bar input.input-group-field { background: {{ section.settings.bg_search_color }}; border-color: {{ section.settings.border_search_color }}; color: {{ section.settings.header_link_text_color }}; }
-.header-bottom .selectize-dropdown, 
-.header-bottom .selectize-input, 
+.header-bottom .selectize-dropdown,
+.header-bottom .selectize-input,
 .header-bottom .selectize-input input,
 .header-panel-bottom .free_shipping { color: {{ section.settings.header_free_shipping_text_color }}; }
 .header-bottom .top-cart a #cartCount { background: {{ section.settings.bg_cart_color }}; }
@@ -426,14 +426,14 @@
 .header-bottom .top-cart .fa-shopping-bag,
 .header-bottom .search-bar .input-group-btn button.btn,
 .customer-area .dropdown-menu a,
-.header-bottom .top-cart a, 
+.header-bottom .top-cart a,
 .customer-links a,
 .customer-links,.currency,
 .header-bottom .selectize-control div.item{ color: {{ section.settings.header_link_text_color }}; }
 .header-bottom .selectize-control.single .selectize-input:after{border-top-color:{{ section.settings.header_link_text_color }};}
 .header-bottom .selectize-control.single .selectize-input.dropdown-active:after{border-bottom-color:{{ section.settings.header_link_text_color }}; }
 .customer-area .dropdown-menu a:hover,
-.header-bottom .top-cart a:hover span.first, 
+.header-bottom .top-cart a:hover span.first,
 .header-bottom .top-cart a:focus span.first,
 .customer-links a:hover { border-bottom: 1px solid {{ section.settings.header_link_text_color }}; }
 {% if section.settings.enable_retina %}

@@ -10,7 +10,7 @@
           {% else %}
           {{ settings.header_top_text | split: '|' | first }}
           {% endif %}
-          
+
           {% if settings.header_top_link_text != blank %}
             {% if settings.enable_multilang %}
             <a href="{{ settings.header_top_link }}" class="link lang1">{{ settings.header_top_link_text | split: '|' | first }}</a>
@@ -31,18 +31,18 @@
       jQuery('.header-top a.close').bind('click',function(){
         jQuery('.header-top').remove();
         jQuery.cookie('headerTop', 'closed', {expires:1, path:'/'});
-      });  
+      });
   </script>
     {% endif %}
   {% endif %}
-  
+
   <div class="header-bottom">
     <div class="container">
 
       <div class="header-mobile">
         <div class="menu-block visible-phone"><!-- start Navigation Mobile  -->
           <div id="showLeftPush"></div>
-        </div><!-- end Navigation Mobile  --> 
+        </div><!-- end Navigation Mobile  -->
 
         <div class="customer-area dropdown">
           <a data-toggle="dropdown" href="#">Dropdown trigger</a>
@@ -62,7 +62,7 @@
       <div class="header-panel-top">
         <div class="nav-search on">{% include 'search-bar' %}</div>
         <div class="currency">{% include 'new-currency-picker' %}</div>
-        
+
         {% if settings.enable_multilang %}
         <div class="lang-block">
           <select id="lang-switcher">
@@ -72,14 +72,14 @@
         </div>
         <script>
           translator.updateLangSwitcher();
-          jQuery('#lang-switcher').selectize();          
+          jQuery('#lang-switcher').selectize();
         </script>
-        <style>        
-        .selectize-control div[data-value~="1"] {background: url({{ "i-lang-1.png" | asset_url }}) no-repeat;}        
-        .selectize-control div[data-value~="2"] {background: url({{ "i-lang-2.png" | asset_url }}) no-repeat;}        
+        <style>
+        .selectize-control div[data-value~="1"] {background: url({{ "i-lang-1.png" | asset_url }}) no-repeat;}
+        .selectize-control div[data-value~="2"] {background: url({{ "i-lang-2.png" | asset_url }}) no-repeat;}
         </style>
         {% endif %}
-        
+
         {% if settings.display_header_text_order and settings.header_text_order != blank %}
           {% if settings.enable_multilang %}
             <p class="text_order">
@@ -91,7 +91,7 @@
           {% endif %}
         {% endif %}
       </div>
-      
+
       <div class="header-panel">
         <div class="row">
           <h1 class="header-logo col-xs-12 col-sm-4">
@@ -128,15 +128,15 @@
                   <a href="javascript:void(0)" id="cartToggle">
                     <span class="first" {% if settings.enable_multilang %}data-translate="cart.general.shopping_cart"{% endif %}>{{ 'cart.general.shopping_cart' | t }}</span>
                     <span id="cartCount">{{ cart.item_count }}</span>
-                  </a> 
+                  </a>
                 </p>
-                <div id="dropdown-cart" style="display:none"> 
+                <div id="dropdown-cart" style="display:none">
                   <div class="no-items">
                     <p>{{ 'cart.general.empty' | t }}</p>
                     <p class="text-continue"><a href="javascript:void(0)" {% if settings.enable_multilang %}data-translate="cart.ajax_cart.continue_shopping"{% endif %}>{{ 'cart.ajax_cart.continue_shopping' | t }}</a></p>
                   </div>
                   <div class="has-items">
-                    <ol class="mini-products-list">  
+                    <ol class="mini-products-list">
                       {% for item in cart.items %}
                       <li class="item" id="cart-item-{{item.id}}">
                         <a href="{{item.url}}" class="product-image">
@@ -166,10 +166,10 @@
                       </li>
                       {% endfor %}
                     </ol>
-                    <div class="summary">                
+                    <div class="summary">
                       <p class="total">
                         <span class="label"><span {% if settings.enable_multilang %}data-translate="cart.label.total"{% endif %}>{{ 'cart.label.total' | t }}</span>:</span>
-                        <span class="price">{{cart.total_price | money}}</span> 
+                        <span class="price">{{cart.total_price | money}}</span>
                       </p>
                     </div>
                     <div class="actions">
@@ -183,20 +183,20 @@
               {% comment %}
               If customer accounts are enabled, provide login and create account links
               {% endcomment %}
-            </div> <!-- End Top Header --> 
+            </div> <!-- End Top Header -->
           </div>
           <div class="nav-search on">{% include 'search-bar' %}</div>
         </div>
 
       </div>
     </div>
-    
+
     <nav class="nav-bar" role="navigation">
       <div class="header-logo-fix">
         <a href="/">{{ 'logo_fix.png' | asset_url | img_tag: shop.name }}</a>
       </div>
       <div class="container">
-        {% include 'site-nav' %}     
+        {% include 'site-nav' %}
       </div>
     </nav>
   </div>
