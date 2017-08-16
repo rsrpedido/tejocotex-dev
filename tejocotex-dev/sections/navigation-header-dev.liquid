@@ -1,0 +1,197 @@
+<div class="nav-bar-mobile">
+  <nav class="nav-bar" role="navigation">
+    <div class="header-logo-fix">
+      {% if section.settings.logo_fix != blank %}
+         <a href="/">
+           <img src="{{ section.settings.logo_fix | img_url: 'x48' }}" alt="{{ section.settings.logo_fix.alt | default: shop.name }}" itemprop="logo">
+        </a>
+      {% else %}
+  		 <a class="logo-title" href="/">{{shop.name}}</a>
+ 	 {% endif %}
+     </div>
+    <div class="container">
+      {% include 'site-nav-header' %}
+    </div>
+  </nav>
+</div>
+{% schema %}
+  {
+    "name": "Navigation",
+	"max_blocks": 10,
+    "settings": [
+	   {
+        "type": "header",
+        "content": "Navigation"
+      },
+      {
+        "type": "color",
+        "id": "nav_bg_color",
+        "label": "Nav Background Color",
+        "default": "#ee6497"
+      },
+      {
+        "type": "color",
+        "id": "nav_top_menu_color",
+        "label": "Nav Top Menu Color Text",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "nav_hover_color",
+        "label": "Nav Link Top Hover Color",
+        "default": "#fff"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_dropdown_arrow",
+        "label": "Show dropdown arrow icon?"
+      },
+
+      {
+        "type": "header",
+        "content": "Dropdown Menu"
+      },
+      {
+        "type": "select",
+        "id": "nav_dropdown_border_style",
+        "label": "Border Dropdown Menu Style",
+        "options": [
+          {
+            "value": "solid",
+            "label": "Solid"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          },
+          {
+            "value": "dotted",
+            "label": "Dotted"
+          }
+        ],
+        "default": "solid"
+      },
+      {
+        "type": "color",
+        "id": "nav_dropdown_border_color",
+        "label": "Border Dropdown Menu Color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "nav_dropdown_bg_color",
+        "label": "Dropdown Menu Background Color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "nav_link_color",
+        "label": "Menu Link Color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "nav_dropdown_title_color",
+        "label": "Dropdown Menu Title Color",
+        "default": "#db2769"
+      },
+	  {
+        "type": "color",
+        "id": "nav_dropdown_title_color_hover",
+        "label": "Dropdown Menu Title Color Hover",
+        "default": "#db2769"
+      },
+      {
+        "type": "color",
+        "id": "nav_dropdown_link_color",
+        "label": "Dropdown Menu Link Color",
+        "default": "#505050"
+      },
+
+      {
+        "type": "color",
+        "id": "nav_dropdown_link_color_hover",
+        "label": "Dropdown Menu Link Color Hover",
+        "default": "#fff"
+      }
+{% endschema %}
+<style>
+
+/*  Navigation
+/*-------------------------- */
+
+.nav-bar { background: {{ section.settings.nav_bg_color }}; }
+  .have-fixed .nav-search .icon-search,
+.header-bottom.on .top-cart a #cartCount,
+.header-bottom.on .nav-search-fix .icon-search,
+.header-bottom.on .top-cart i,
+.site-nav-header> li > a { color: {{ section.settings.nav_top_menu_color }};}
+  .site-nav-header> li > a.current > span:first-child{border-color: {{ section.settings.nav_top_menu_color }};}
+.site-nav-headerli.dropdown .icon-dropdown { border-top-color: {{ section.settings.nav_top_menu_color }}; }
+
+.site-nav-header> li:hover > a > span:first-child,
+.site-nav-header> li:hover > a.current > span:first-child { border-color: {{ section.settings.nav_link_top_hover_color }}; }
+.site-nav-header> li:hover > a ,
+.site-nav-header> li:hover > a:hover{ color: {{ section.settings.nav_hover_color }}; }
+.site-nav-headerli.dropdown:hover .icon-dropdown { border-top-color: {{ section.settings.nav_hover_color }}; }
+.site-nav-header> li:hover > a > span:first-child,
+.site-nav-header> li:hover > a.current > span:first-child{border-color:{{ section.settings.nav_hover_color }};}
+
+{% if section.settings.enable_new %}
+.wrapper-container .site-nav-headerli.icon_new > a { position: relative; }
+.wrapper-container .site-nav-headerli.icon_new > a:after { content: "New"; position: absolute; top: -24px; right: -13px; background: #e95144; color: #fff; font-size: 8px; text-transform: uppercase; line-height: 18px; height: 17px; width: 33px; text-align: center; }
+.wrapper-container .site-nav-headerli.icon_new > a:before { content: ""; border: 4px solid transparent; border-top-color: #e95144; position: absolute; right: -1px; top: -7px; }
+{% endif %}
+
+
+/* dropdown menu */
+.site-nav-dropdown {
+  border-style: {{ section.settings.nav_dropdown_border_style }};
+  border-color: {{ section.settings.nav_dropdown_border_color }};
+  background: {{ section.settings.nav_dropdown_bg_color}};
+}
+  .site-nav-dropdown.style_3 .widget-featured-product .price-box span,
+.site-nav-dropdown.style_3 .widget-featured-product .grid-view-item_title a,
+.site-nav-dropdown.style_3 .widget-featured-product h3,
+.site-nav-dropdown .col-1 .inner > .current,
+.site-nav-dropdown .col .inner >  .current,
+.site-nav-dropdown .grid-view-item h3.title{
+color:{{ section.settings.nav_dropdown_title_color }};
+}
+  .site-nav-dropdown .col-1 .inner:hover > .current,
+.site-nav-dropdown .col .inner:hover >  .current,
+.site-nav-dropdown .grid-view-item h3.title:hover{
+color:{{ section.settings.nav_dropdown_title_color_hover }};
+}
+
+.site-nav-dropdown .col-1 ul.dropdown li a,
+.site-nav-dropdown .col ul.dropdown li a,
+.grid-view-item_title a,
+.nav-bar .site-nav-dropdown li a{
+  color:{{ section.settings.nav_dropdown_link_color }};
+}
+  .site-nav-dropdown li.dropdown .icon-dropdown{border-top-color:{{ section.settings.nav_dropdown_link_color }}!important;}
+.site-nav-dropdown .col-1 ul.dropdown li:hover > a:before, .site-nav-dropdown .col ul.dropdown li:hover > a:before{
+   background:{{ section.settings.nav_dropdown_link_color_hover }};
+}
+.site-nav-dropdown li:hover > a,
+.site-nav-dropdown .col-1 ul.dropdown li:hover > a{
+    color:{{ section.settings.nav_dropdown_link_color_hover }};
+}
+.site-nav-dropdown li:hover > a:before{
+  background:{{ section.settings.nav_dropdown_link_color_hover }};
+}
+  @media (min-width: 768px){
+	{% if section.settings.bg_cart_fixed_top !=blank %}
+      .have-fixed  .top-cart .icon {
+        background:url( {{ section.settings.bg_cart_fixed_top | img_url : "master" }} ) center center no-repeat;
+        color:{{ section.settings.color_fixed_top }};
+        vertical-align: 0;
+      }
+    {% endif %}
+      .header-bottom.on .top-cart a span.first{border-left:1px solid {{ section.settings.color_fixed_top }} }
+     .have-fixed .icon-search{border-color:{{ section.settings.color_fixed_top }}}
+
+  }
+
+</style>

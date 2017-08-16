@@ -10,7 +10,7 @@
  	 {% endif %}
      </div>
     <div class="container">
-      {% include 'site-nav' %}  
+      {% include 'site-nav' %}
     </div>
   </nav>
 </div>
@@ -56,13 +56,13 @@
         "id": "nav_top_menu_color",
         "label": "Nav Top Menu Color Text",
         "default": "#fff"
-      }, 
+      },
       {
         "type": "color",
         "id": "nav_hover_color",
         "label": "Nav Link Top Hover Color",
         "default": "#fff"
-      },    
+      },
       {
         "type": "checkbox",
         "id": "show_dropdown_arrow",
@@ -141,7 +141,7 @@
         "label": "Dropdown Menu Link Color",
         "default": "#505050"
       },
-      
+
       {
         "type": "color",
         "id": "nav_dropdown_link_color_hover",
@@ -193,7 +193,7 @@
 			"id": "link_banner_first_style_1",
 			"label": "Banner link"
 		  }
-		  
+
 		]
       },
 	  {
@@ -218,7 +218,7 @@
             "id": "main_linklist_2",
             "label": "Collection"
           },
-		  
+
 		  {
             "type": "image_picker",
             "id": "banner_second_style_2",
@@ -276,7 +276,7 @@
             "id": "main_linklist_3",
             "label": "Collection"
           },
-		  
+
 		  {
             "type": "text",
             "id": "title_featured_product_3",
@@ -348,7 +348,7 @@
   }
 {% endschema %}
 <style>
-  
+
 /*  Navigation
 /*-------------------------- */
 
@@ -367,7 +367,7 @@
 .site-nav > li:hover > a:hover{ color: {{ section.settings.nav_hover_color }}; }
 .site-nav li.dropdown:hover .icon-dropdown { border-top-color: {{ section.settings.nav_hover_color }}; }
 .site-nav > li:hover > a > span:first-child,
-.site-nav > li:hover > a.current > span:first-child{border-color:{{ section.settings.nav_hover_color }};}  
+.site-nav > li:hover > a.current > span:first-child{border-color:{{ section.settings.nav_hover_color }};}
 
 {% if section.settings.enable_new %}
 .wrapper-container .site-nav li.icon_new > a { position: relative; }
@@ -378,24 +378,24 @@
 
 /* dropdown menu */
 .site-nav-dropdown {
-  border-style: {{ section.settings.nav_dropdown_border_style }}; 
-  border-color: {{ section.settings.nav_dropdown_border_color }}; 
-  background: {{ section.settings.nav_dropdown_bg_color}}; 
+  border-style: {{ section.settings.nav_dropdown_border_style }};
+  border-color: {{ section.settings.nav_dropdown_border_color }};
+  background: {{ section.settings.nav_dropdown_bg_color}};
 }
   .site-nav-dropdown.style_3 .widget-featured-product .price-box span,
 .site-nav-dropdown.style_3 .widget-featured-product .grid-view-item_title a,
 .site-nav-dropdown.style_3 .widget-featured-product h3,
-.site-nav-dropdown .col-1 .inner > .current, 
+.site-nav-dropdown .col-1 .inner > .current,
 .site-nav-dropdown .col .inner >  .current,
 .site-nav-dropdown .grid-view-item h3.title{
-color:{{ section.settings.nav_dropdown_title_color }}; 
-} 
+color:{{ section.settings.nav_dropdown_title_color }};
+}
   .site-nav-dropdown .col-1 .inner:hover > .current,
 .site-nav-dropdown .col .inner:hover >  .current,
 .site-nav-dropdown .grid-view-item h3.title:hover{
 color:{{ section.settings.nav_dropdown_title_color_hover }};
 }
-  
+
 .site-nav-dropdown .col-1 ul.dropdown li a,
 .site-nav-dropdown .col ul.dropdown li a,
 .grid-view-item_title a,
@@ -423,7 +423,7 @@ color:{{ section.settings.nav_dropdown_title_color_hover }};
     {% endif %}
       .header-bottom.on .top-cart a span.first{border-left:1px solid {{ section.settings.color_fixed_top }} }
      .have-fixed .icon-search{border-color:{{ section.settings.color_fixed_top }}}
-    	
+
   }
 
 </style>
@@ -434,7 +434,7 @@ color:{{ section.settings.nav_dropdown_title_color_hover }};
   var heightTop = jQuery('.site-header').outerHeight();
 
   jQuery(window).scroll(function () {
- 
+
       var scrollTop = jQuery(this).scrollTop();
       var w = window.innerWidth;
       if (scrollTop > heightHeader) {
@@ -443,7 +443,7 @@ color:{{ section.settings.nav_dropdown_title_color_hover }};
          jQuery('.header-bottom').addClass('on');
           jQuery('.nav-search').removeClass('on');
          jQuery('.main-content').css('padding-top',heightHeader);
-          
+
         }
       }
       else {

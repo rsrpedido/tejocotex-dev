@@ -9,7 +9,7 @@
   <!-- Basic page needs ================================================== -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	
+
   <!-- Title and description ================================================== -->
   <title>
   {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
@@ -26,18 +26,18 @@
   <!-- Helpers ================================================== -->
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  
+
   <!-- Favicon -->
    {% if settings.favicon != blank %}
     <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
   {% endif %}
- 
+
    <!-- fonts -->
   {% include 'head_fonts' %}
-  
+
    <!-- Styles -->
    {% include 'head_styles' %}
-  
+
    <!-- Scripts -->
   {% include 'head_scripts' %}
 
@@ -66,11 +66,10 @@
     <div class="gf-menu-device-wrapper">
       <div class="close-menu">x</div>
       <div class="gf-menu-device-container"></div>
-    </div>             
+    </div>
   </nav>
-  <div class="wrapper-container">	
+  <div class="wrapper-container">
 	{% section 'header' %}
-    {% section 'navigation' %}
     <div class="quick-view"></div>
 
     <main class="main-content {% if template contains 'index' or template contains 'contact' %}{% else %}container{% endif %}" role="main">
