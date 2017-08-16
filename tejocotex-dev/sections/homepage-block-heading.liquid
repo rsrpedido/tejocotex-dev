@@ -4,24 +4,34 @@
       <fieldset class="box-title">
         <legend align="center">{{ section.settings.homepage_title | escape}}</legend>
       </fieldset>
+      {% if section.settings.homepage_text != blank %}
+      <div class="homepage_text_container">
+        <p>{{ section.settings.homepage_text | newline_to_br}}</p>
+      </div>
+      {% endif %}
     </div>
   </div>
 {% endif %}
 
 {% schema %}
   {
-    "name": "Homepage Heading",
+    "name": "Text Content",
 	"class": "index-section",
     "settings": [
         {
           "type": "text",
           "id": "homepage_title",
-          "label": "Heading Text"
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "homepage_text",
+          "label": "Text"
         }
 	     ],
      "presets": [
        {
-         "name": "Homepage Heading",
+         "name": "Text Content",
          "category": "Heading"
        }
  	]
