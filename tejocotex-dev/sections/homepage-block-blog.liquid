@@ -1,0 +1,129 @@
+
+{% if section.settings.blog-bottom %}
+
+
+{% assign blog_handle = 'news' %}
+
+{% unless blogs[blog_handle].empty? or blogs[blog_handle].articles.size == 0 %}
+
+{% if blogs[blog_handle].articles.size >= 3 %}
+  {% assign article_width = 'col-sm-4' %}
+{% elsif blogs[blog_handle].articles.size == 2 %}
+  {% assign article_width = 'col-sm-6' %}
+{% elsif blogs[blog_handle].articles.size == 1 %}
+  {% assign article_width = 'col-sm-12' %}
+{% endif %}
+
+
+
+<div class="banner-home-bottom container">
+   {% if section.settings.blog-block-title != blank %}
+  <div class="widget-title wow fadeIn">  
+    <fieldset class="box-title">
+        <legend align="center">{{ section.settings.blog-block-title | escape}}</legend>
+      </fieldset>
+  </div>
+  {% endif %}
+ <ul class="row">
+    {% for article in blogs[blog_handle].articles limit: 3 %}
+    <li class="col-xs-12 {{ article_width }} wow fadeInUp" data-wow-delay="{{ settings.time_lazy_load }}ms">
+      <div class="zi-banner">
+        <div class="banner-image  zi-banner-image">
+          <a href="{{ article.url }}">
+
+           {% assign content = article.excerpt_or_content %} 
+          {% if article.image %}
+          <p>
+            <a href="{{ article.url }}">
+              <img src="{{ article | img_url: 'grande' }}" alt="{{ article.title | escape }}" />
+            </a>
+          </p>
+          {% endif %}
+
+          </a>
+        </div>
+      </div>
+      <div class="des">    
+        <h4 style="{% if block.settings.heading_size != blank %}font-size: {{ block.settings.heading_size }}px;{% endif %}{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}">
+
+        {{ article.title | link_to: article.url }}</h4>
+  
+        <p><small>{{ article.published_at | date: '%B %d, %Y' }}</small></p>
+
+
+         {% if article.image %}
+            <p>{{ content | strip_html | truncatewords: 50 }}</p>
+          {% else %}
+            <p>{{ content | strip_html | truncatewords: 100 }}</p>
+          {% endif %}
+
+
+       
+        <p style="{% if block.settings.custom_bottom_description_size != blank %}font-size: {{ block.settings.custom_bottom_description_size }}px;{% endif %}{% if block.settings.custom_bottom_description_color != blank %}color: {{ block.settings.custom_bottom_description_color }};{% endif %}">
+
+        {% if article.image %}
+            {{ content | strip_html | truncatewords: 50 }}
+          {% else %}
+            {{ content | strip_html | truncatewords: 100 }}
+          {% endif %}
+        
+        </p>
+
+
+
+      
+        <a class="btn" href="{{ article.url }}">Read More 
+        <span class="arrow">arrow</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endunless %}
+{% endif %}
+
+<!-- PARTITION -->
+
+
+{% schema %}
+  {
+    "name": "Homepage Blog",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "blog-bottom",
+        "label": "Enable",
+        "default": true
+      },
+    {
+        "type": "text",
+        "id": "blog-block-title",
+        "label": "Title",
+        "default": "Blog Post"
+      }
+    ,
+     {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000"
+      },
+      {
+      "type": "text",
+      "id": "heading_size",
+      "label": "Heading Font Size",
+      "default": "16"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Homepage Blog",
+        "category": "Advanced layout"
+      }
+    ]
+  }
+{% endschema %}
+<style>
+</style>
