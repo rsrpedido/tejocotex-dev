@@ -15,7 +15,7 @@
         {% for block in section.blocks %}
           <div class="row">                
             {% if block.settings.image != blank %}
-              {%- assign img_url = block.settings.image | img_url: '450x450' -%}
+              {%- assign img_url = block.settings.image | img_url: '700x700' -%}
               
               <div class="slider-content col-sm-6"> 
                  <div class="testimonial-content">
@@ -132,7 +132,7 @@ var prodVideoId= $('iframe').data('video-id');
        },
     {
         "type": "paragraph",
-        "content": "IMPORTANT: For best results, Upload image : 1880px x 720px recommended. Try to keep your slideshow images the same size."
+        "content": "IMPORTANT: For best results, Upload image : 700x700px"
       }
     ],
     "blocks": [
