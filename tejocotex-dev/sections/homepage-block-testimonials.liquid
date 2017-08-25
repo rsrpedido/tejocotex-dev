@@ -1,0 +1,264 @@
+
+    <div class="testimonial-slideshow">
+      <div class="widget-title wow fadeInUp container">
+        <fieldset class="box-title">
+            <legend align="center">{{ section.settings.testimonial_title | escape}}</legend>
+        </fieldset>
+      </div>
+        <div class="variable-width" data-slick='{
+        dots: true,
+        slidesToScroll: 1,
+        autoplay:true,
+        fade: {{ section.settings.slideshow_transition }},
+        autoplaySpeed:{{ section.settings.slideshow_speed }}
+      }'>
+        {% for block in section.blocks %}
+          <div class="row">                
+            {% if block.settings.image != blank %}
+              {%- assign img_url = block.settings.image | img_url: '450x450' -%}
+              
+              <div class="slider-content col-sm-6"> 
+                 <div class="testimonial-content">
+                       <h2 class="slide-heading animated "
+                    style="{% if block.settings.heading_size != blank %}
+                           font-size: {{ block.settings.heading_size }}px;
+                           {% endif %}
+                           {% if block.settings.heading_color != blank %}
+                           color:{{ block.settings.heading_color }};
+                           {% endif %}">
+                  {% include 'multilang' with block.settings.title  %}
+                   <p class="line" 
+                     style="{% if block.settings.heading_color != blank %}
+                            background-color: {{ block.settings.heading_color }};
+                            {% endif %}
+                            ">&nbsp;</p>
+                </h2>
+                <p class="slide-text animated "
+                   style="
+                           {% if block.settings.subheading_color != blank %}
+                           color:{{ block.settings.subheading_color }};
+                           {% endif %} ">
+                  {% include 'multilang' with block.settings.subheading %}
+                </p>
+                <div class="testimonial-details animated">
+                  <p class="testimonial-name">{% include 'multilang' with block.settings.testimonial_name %}</p>
+                  <p class="testimonial-position">{% include 'multilang' with block.settings.testimonial_details %}</p>
+                </div>
+                 </div>
+              </div> <!--- END CONTENT -->
+                    
+              <div class="slider-content col-sm-6">
+                <div class="testimonial-image">
+                  <img style="width:auto;" src="{{ img_url }}"  class="slide-img " alt="{{ block.settings.image.alt }}" />
+                </div>
+              </div><!--- END CONTENT-IMAGE -->
+            {% endif %}
+           <!--- ADD SLIDESHOW BG -->
+           
+              
+          </div><!-- END CONTAINER -->
+        {% endfor %}
+      </div>
+    </div>
+
+<script>
+  
+var prodVideoId= $('iframe').data('video-id');
+  $(document).on('ready', function() {
+  $('.variable-width').fitVids().slick({
+    dots: true,
+    slidesToScroll: 1,
+    autoplay:true,
+    fade: {{ section.settings.slideshow_transition }},
+    autoplaySpeed:{{ section.settings.slideshow_speed }},
+    afterChange: function(slick, currentSlide){
+    console.log(currentSlide);
+  }
+});   
+  })
+</script>
+
+{% schema %}
+  {
+    "name": "Slideshow",
+    "class": "index-section index-section--flush",
+    "max_blocks": 10,
+    "settings": [  
+      {
+        "type": "text",
+        "id": "testimonial_title",
+        "label": "Heading"
+      },
+      {
+        "type": "select",
+        "id": "slideshow_speed",
+        "label": "Change slides every",
+        "options": [
+          { "value": "1000", "label": "1 seconds" },
+          { "value": "2000", "label": "2 seconds" },
+          { "value": "3000", "label": "3 seconds" },
+          { "value": "4000", "label": "4 seconds" },
+          { "value": "5000", "label": "5 seconds" },
+          { "value": "6000", "label": "6 seconds" },
+          { "value": "7000", "label": "7 seconds" },
+          { "value": "8000", "label": "8 seconds" },
+          { "value": "9000", "label": "9 seconds" },
+          { "value": "10000", "label": "10 seconds" }
+        ],
+        "default": "5000"
+      },
+      {
+        "type": "select",
+        "id": "slideshow_transition",
+        "label": "Slideshow transition effect",
+        "options": [
+          {
+            "value": "false",
+            "label": "Slide"
+          },
+          {
+            "value": "true",
+            "label": "Fade"
+          }
+        ],
+        "default": "true"
+      },
+    {
+            "type": "color",
+            "id": "navigation_color",
+            "label": "Navigation color",
+            "default": "#fff",
+          "info": "Default Value: #fff"
+       },
+    {
+        "type": "paragraph",
+        "content": "IMPORTANT: For best results, Upload image : 1880px x 720px recommended. Try to keep your slideshow images the same size."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "select",
+            "id": "alignment",
+            "label": "Text alignment",
+            "default": "center",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+      {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading Color",
+            "default": "#000",
+          "info": "Default Value: #000"
+          },
+      {
+            "type": "text",
+            "id": "heading_size",
+            "label": "Heading Font Size",
+            "default": "24",
+          "info": "Default Value: 24"
+          },
+          {
+            "type": "textarea",
+            "id": "subheading",
+            "label": "Subheading"
+      },
+      {
+            "type": "color",
+            "id": "subheading_color",
+            "label": "SubHeading Color",
+            "default": "#000",
+          "info": "Default Value: #000"
+          },
+           {
+            "type": "text",
+            "id": "testimonial_name",
+            "label": "Name"
+           },
+           {
+            "type": "text",
+            "id": "testimonial_details",
+            "label": "Details"
+           }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Homepage Block Testimonials",
+      "category": "Testimonials",
+      "settings": {
+        "slideshow_speed": "5000",
+    "slideshow_transition": "false"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        }
+      ]
+    }]
+  }
+{% endschema %}
+<style>
+ .home-slideshow  .slick-arrow:before{ color: {{ section.settings.navigation_color }}; }
+  .fluid-width-video-wrapper{padding-top:{{ section.settings.video_height }}!important;}
+</style>
+
+{% javascript %}
+function process_slick_event(evt) {
+  var _slick = $( "#" +evt.target.id + " .home-slideshow .variable-width");
+  if( _slick.length )
+  {
+    switch ( evt.originalEvent.type ) {
+      case "shopify:section:load" : 
+        console.log('Load ' + _slick.attr("id"));
+        _slick.slick (
+            {
+              dots: true,
+         slidesToScroll: 1,
+           
+              autoplay: _slick.data('slick').autoplay,
+              autoplaySpeed: _slick.data('slick').autoplaySpeed
+            }
+          );
+      break; 
+      case "shopify:section:unload" :
+        console.log('Unload ' + _slick.attr("id"));
+        _slick.slick('unslick');
+      break;
+
+     } 
+  }
+}
+    
+$(document)
+ .on( 'shopify:section:load', process_slick_event )
+ .on( 'shopify:section:unload', process_slick_event )
+;
+
+{% endjavascript %}
