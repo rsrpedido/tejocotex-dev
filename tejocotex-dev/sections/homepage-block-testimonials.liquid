@@ -145,26 +145,7 @@ var prodVideoId= $('iframe').data('video-id');
             "id": "image",
             "label": "Image"
           },
-          {
-            "type": "select",
-            "id": "alignment",
-            "label": "Text alignment",
-            "default": "center",
-            "options": [
-              {
-                "value": "left",
-                "label": "Left"
-              },
-              {
-                "value": "center",
-                "label": "Center"
-              },
-              {
-                "value": "right",
-                "label": "Right"
-              }
-            ]
-          },
+         
           {
             "type": "text",
             "id": "title",
@@ -225,13 +206,13 @@ var prodVideoId= $('iframe').data('video-id');
   }
 {% endschema %}
 <style>
- .home-slideshow  .slick-arrow:before{ color: {{ section.settings.navigation_color }}; }
+ .testimonial-slideshow  .slick-arrow:before{ color: {{ section.settings.navigation_color }}; }
   .fluid-width-video-wrapper{padding-top:{{ section.settings.video_height }}!important;}
 </style>
 
 {% javascript %}
 function process_slick_event(evt) {
-  var _slick = $( "#" +evt.target.id + " .home-slideshow .variable-width");
+  var _slick = $( "#" +evt.target.id + " .testimonial-slideshow .variable-width");
   if( _slick.length )
   {
     switch ( evt.originalEvent.type ) {

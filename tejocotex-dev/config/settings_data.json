@@ -1005,7 +1005,18 @@
           "header_free_shipping": "Free shipping on All Orders. No Minimum Purchase.",
           "header_free_shipping_text_color": "#000",
           "bg_cart_color": "#ffe5e5",
-          "dropdowncart_type": "hover"
+          "dropdowncart_type": "hover",
+          "nav_top_menu_color": "#57585a",
+          "nav_hover_color": "#009345",
+          "show_dropdown_arrow": false,
+          "nav_dropdown_border_style": "solid",
+          "nav_dropdown_border_color": "#000",
+          "nav_dropdown_bg_color": "#ffffff",
+          "nav_link_color": "#000",
+          "nav_dropdown_title_color": "#db2769",
+          "nav_dropdown_title_color_hover": "#db2769",
+          "nav_dropdown_link_color": "#505050",
+          "nav_dropdown_link_color_hover": "#fff"
         }
       },
       "navigation": {
@@ -1090,9 +1101,9 @@
           "1489074792947": {
             "type": "image",
             "settings": {
-              "image": "",
-              "three_block_heading_banner": "Editor’s Pick |  Unser Tip",
-              "three_block_heading_color": "#fff",
+              "image": "shopify:\/\/shop_images\/product-3_0454e9b8-12dd-4875-96f8-728e0824e388.jpg",
+              "three_block_heading_banner": "Product 1",
+              "three_block_heading_color": "#57585a",
               "three_block_heading_size": "16",
               "link": ""
             }
@@ -1100,9 +1111,9 @@
           "1489074846538": {
             "type": "image",
             "settings": {
-              "image": "",
-              "three_block_heading_banner": "Shoes | Schuhe",
-              "three_block_heading_color": "#0f0e0e",
+              "image": "shopify:\/\/shop_images\/product-2_a06de24e-3769-4d0e-9a76-00c6648cc6ad.jpg",
+              "three_block_heading_banner": "Product 2",
+              "three_block_heading_color": "#57585a",
               "three_block_heading_size": "16",
               "link": ""
             }
@@ -1110,9 +1121,9 @@
           "1489074856332": {
             "type": "image",
             "settings": {
-              "image": "",
-              "three_block_heading_banner": "Accessories | Zubehör",
-              "three_block_heading_color": "#fff",
+              "image": "shopify:\/\/shop_images\/product-1_77d24479-030f-4470-8b74-2d0c34b50159.jpg",
+              "three_block_heading_banner": "Product 3",
+              "three_block_heading_color": "#57585a",
               "three_block_heading_size": "16",
               "link": ""
             }
@@ -1127,180 +1138,11 @@
           "display_three_block_banner": true
         }
       },
-      "1489249304429": {
-        "type": "brands",
-        "blocks": {
-          "1489249384118": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          },
-          "1489249389892": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          },
-          "1489249395281": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          },
-          "1489249428812": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          },
-          "1489249433392": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          },
-          "1489249438559": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          },
-          "1489249444782": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          },
-          "1489249450917": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          },
-          "1489249456869": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          },
-          "1489249461349": {
-            "type": "image",
-            "settings": {
-              "image": "",
-              "title": "Loremous",
-              "link": ""
-            }
-          }
-        },
-        "block_order": [
-          "1489249384118",
-          "1489249389892",
-          "1489249395281",
-          "1489249428812",
-          "1489249433392",
-          "1489249438559",
-          "1489249444782",
-          "1489249450917",
-          "1489249456869",
-          "1489249461349"
-        ],
-        "settings": {
-          "display_brands_slider": true
-        }
-      },
-      "1489250340502": {
-        "type": "homepage-custom-content-bottom",
-        "blocks": {
-          "1494707878945": {
-            "type": "banner",
-            "settings": {
-              "image": "",
-              "heading": "Lorem Et Dorus",
-              "heading_color": "#000",
-              "heading_size": "16",
-              "custom_bottom_description": "Nullam aliquet vestibulum augue non varius. Cras nec congue elitos. Duis tristique del ante nec aliquam. Praesent urna tellus laoreet an tellus ullamcorper fermentum facilisis eratum.",
-              "custom_bottom_description_color": "#2d2d2d",
-              "custom_bottom_description_size": "12",
-              "custom_bottom_button": "Shop Now",
-              "custom_bottom_url": ""
-            }
-          },
-          "1494707888534": {
-            "type": "banner",
-            "settings": {
-              "image": "",
-              "heading": "MILANCELOS A LANOS",
-              "heading_color": "#000",
-              "heading_size": "16",
-              "custom_bottom_description": "Nullam aliquet vestibulum augue non varius. Cras nec congue elitos. Duis tristique del ante nec aliquam. Praesent urna tellus laoreet an tellus ullamcorper fermentum facilisis eratum.",
-              "custom_bottom_description_color": "#2d2d2d",
-              "custom_bottom_description_size": "12",
-              "custom_bottom_button": "Shop Now",
-              "custom_bottom_url": ""
-            }
-          },
-          "1494707894119": {
-            "type": "banner",
-            "settings": {
-              "image": "",
-              "heading": "COMOS DE MILANO",
-              "heading_color": "#000",
-              "heading_size": "16",
-              "custom_bottom_description": "Nullam aliquet vestibulum augue non varius. Cras nec congue elitos. Duis tristique del ante nec aliquam. Praesent urna tellus laoreet an tellus ullamcorper fermentum facilisis eratum.",
-              "custom_bottom_description_color": "#2d2d2d",
-              "custom_bottom_description_size": "12",
-              "custom_bottom_button": "Shop Now",
-              "custom_bottom_url": ""
-            }
-          }
-        },
-        "block_order": [
-          "1494707878945",
-          "1494707888534",
-          "1494707894119"
-        ],
-        "settings": {
-          "custom-html-in-bottom": true,
-          "banner_home_bottom_title": "#Featured on ella"
-        }
-      },
-      "1489329138390": {
-        "type": "homepage-block-banner",
-        "settings": {
-          "display_banner": true,
-          "banner": "",
-          "banner_text_title": "Milancelos | lang 2",
-          "banner_text_title_color": "#000",
-          "banner_text_description": "Pellentesque posuere orci lobortis scelerisque blandit. Donec id tellus lacinia an, tincidunt risus ac, consequat velit. Quisquemos sodales suscipit tortor ditaemcos condimentum lacus meleifend menean viverra auctor blanditos comodous. | lang 2",
-          "banner_text_description_color": "#2d2d2d",
-          "banner_button_text": "Shop The Collection | lang2",
-          "banner_button_link": "shopify:\/\/collections\/bags-accessories-taschen-accessoires"
-        }
-      },
       "1489331648460": {
         "type": "homepage-instagram",
         "settings": {
           "show_instagram": true,
-          "instagram_bg_color": "#fff8ee",
+          "instagram_bg_color": "#f3f3f3",
           "instagram_title": "#Ella On Instagram | #Ella Auf Instagram",
           "instagram_des": "Phasellus lorem malesuada ligula pulvinar commodo maecenas suscipit auctom.",
           "display_instagram_button": true,
@@ -1331,21 +1173,21 @@
           "footer_title_color": "#fff",
           "footer_link_color": "#969696",
           "footer_title_1": "Shops",
-          "footer_linklist": "",
+          "footer_linklist": "main-menu",
           "footer_title_2": "Information",
-          "footer_linklist_2": "",
+          "footer_linklist_2": "main-menu",
           "footer_title_3": "Customer Service | Kundendienst",
-          "footer_linklist_3": "",
+          "footer_linklist_3": "main-menu",
           "footer_social_enable": true,
           "footer_social_title": "STAY CONNECTED",
           "fb_like_code": "<div id=\"fb-root\"><\/div>\r\n<script>(function(d, s, id) {\r\n  var js, fjs = d.getElementsByTagName(s)[0];\r\n  if (d.getElementById(id)) return;\r\n  js = d.createElement(s); js.id = id;\r\n  js.src = \"\/\/connect.facebook.net\/en_US\/sdk.js#xfbml=1&version=v2.5\";\r\n  fjs.parentNode.insertBefore(js, fjs);\r\n}(document, 'script', 'facebook-jssdk'));<\/script>\r\n<div class=\"fb-like\" data-href=\"https:\/\/www.facebook.com\/pages\/Halothemes-Premium-Magento-Themes\/469058089834105\" data-layout=\"button_count\" data-action=\"like\" data-show-faces=\"true\" data-share=\"true\"><\/div>",
           "footer_newsletter_enable": true,
           "footer_newsletter_text": "NEWSLETTER SIGN UP",
-          "footer_address_code": "© 2017 ELLA Fashion Store Shopify. All Rights Reserved. Ecommerce Software by Shopify.<br><a href=\"https:\/\/www.halothemes.com\/template_category\/shopify-templates\/\" title=\"Shopify Themes & Templates\">Shopify Themes & Templates<\/a> by <a href=\"http:\/\/halothemes.com\/\" title=\"HaloThemes.com\">HaloThemes.com<\/a>.",
+          "footer_address_code": "© 2017 TEJOCOTEX. All Rights Reserved.",
           "show_payment_icons": true,
           "payment_display_visa": true,
           "payment_display_visa_electron": false,
-          "payment_display_american_express": true,
+          "payment_display_american_express": false,
           "payment_display_master": true,
           "payment_display_maestro": false,
           "payment_display_solo": false,
@@ -1364,13 +1206,13 @@
           "payment_display_jcb": false,
           "payment_display_litecoin": false,
           "payment_display_stripe": false,
-          "icon_visa": "",
+          "icon_visa": "shopify:\/\/shop_images\/002-visa.png",
           "icon_visa_electron": "",
-          "icon_master": "",
+          "icon_master": "shopify:\/\/shop_images\/001-mastercard.png",
           "icon_american_express": "",
           "icon_maestro": "",
           "icon_solo": "",
-          "icon_paypal": "",
+          "icon_paypal": "shopify:\/\/shop_images\/003-paypal.png",
           "icon_amazon_payments": "",
           "icon_apple_pay": "",
           "icon_bitcoin": "",
@@ -1385,16 +1227,6 @@
           "icon_jcb": "",
           "icon_litecoin": "",
           "icon_stripe": ""
-        }
-      },
-      "1489499624605": {
-        "type": "homepage-block-trending",
-        "settings": {
-          "show_slider_trending": true,
-          "show_slider_trending_collection": "",
-          "slider_trending_title": "Trending Now",
-          "slider_trending_limit_all": "10",
-          "trending_collection_results_per_row": "5"
         }
       },
       "sidebar": {
@@ -1757,15 +1589,15 @@
           "1490716464547-0": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/hero.jpg",
+              "image": "shopify:\/\/shop_images\/hero_97677242-8047-4fd6-ba61-faf93e7d619c.jpg",
               "alignment": "left",
-              "title": "LOREM A COSMO",
+              "title": "",
               "heading_color": "#57585a",
               "heading_size": "40",
-              "subheading": "Pellentesque posuere orci lobortis scelerisque blandit. Donec id tellus lacinia an,<br> tincidunt risus ac consequat velit. Quisquemos sodales.",
+              "subheading": "",
               "subheading_color": "#57585a",
               "subheading_size": "12",
-              "button": "Shop The Collection |  Unsere Kollektion anschauen",
+              "button": "",
               "link": "shopify:\/\/collections"
             }
           }
@@ -1785,24 +1617,102 @@
         "type": "homepage-block-new-arrivals",
         "settings": {
           "show_product_list_home_page": true,
-          "product_list_collection": "",
+          "product_list_collection": "frontpage",
           "product_list_title": "New Arrivals",
-          "product_list_limit_all": "5",
+          "product_list_limit_all": "3",
           "display_infinite_scrolling_homepage": true,
-          "product_list_limit": "5",
-          "collection_results_per_row1": "5"
+          "product_list_limit": "3",
+          "collection_results_per_row1": "3"
+        }
+      },
+      "1503641370362": {
+        "type": "homepage-block-heading",
+        "settings": {
+          "homepage_title": "Lorem Ipsum",
+          "homepage_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      },
+      "1503641412825": {
+        "type": "homepage-block-heading",
+        "settings": {
+          "homepage_title": "Heading",
+          "homepage_text": ""
+        }
+      },
+      "1503641467459": {
+        "type": "homepage-block-banner",
+        "settings": {
+          "display_banner": true,
+          "banner": "shopify:\/\/shop_images\/hero-2_0d6051e7-c699-4f90-88a8-b287a4d8dd3e.jpg",
+          "banner_text_title": "",
+          "banner_text_title_color": "#000",
+          "banner_text_description": "",
+          "banner_text_description_color": "#2d2d2d",
+          "banner_button_text": "",
+          "banner_button_link": ""
+        }
+      },
+      "1503641589651": {
+        "type": "homepage-block-blog",
+        "settings": {
+          "blog-bottom": true,
+          "blog-block-title": "Blog Post",
+          "heading_color": "#000",
+          "heading_size": "16"
+        }
+      },
+      "1503641624552": {
+        "type": "homepage-block-testimonials",
+        "blocks": {
+          "1503641624552-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/d979551f672672bcfd5808ee7f0ab2f7_1024x1024_6ce5453a-00db-4907-afbe-bcedcead04bb.jpg",
+              "title": "Testimonial 1",
+              "heading_color": "#000",
+              "heading_size": "16",
+              "subheading": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+              "subheading_color": "#000",
+              "testimonial_name": "Name",
+              "testimonial_details": "Details"
+            }
+          },
+          "1503641713228": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/beautiful-skin_1_1024x1024_83d6fc13-9b0e-4f96-b33b-c4a5446bb30c.jpg",
+              "title": "Testimonial 2",
+              "heading_color": "#000",
+              "heading_size": "18",
+              "subheading": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+              "subheading_color": "#000",
+              "testimonial_name": "Name",
+              "testimonial_details": "Details"
+            }
+          }
+        },
+        "block_order": [
+          "1503641624552-0",
+          "1503641713228"
+        ],
+        "settings": {
+          "testimonial_title": "Testimonials",
+          "slideshow_speed": "5000",
+          "slideshow_transition": "false",
+          "navigation_color": "#fff"
         }
       }
     },
     "content_for_index": [
       "1490716464547",
+      "1503641370362",
+      "1503641412825",
       "1489074782933",
+      "1503641467459",
       "1497262047204",
-      "1489329138390",
-      "1489499624605",
-      "1489250340502",
-      "1489249304429",
-      "1489331648460"
+      "1503641624552",
+      "1489331648460",
+      "1503641589651"
     ]
   },
   "presets": {

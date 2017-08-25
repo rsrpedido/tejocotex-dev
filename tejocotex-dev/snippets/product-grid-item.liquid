@@ -60,9 +60,7 @@
     </div>
 
     <div class="product-bottom">
-       {% if settings.show_vendor %}
-      <div class="product-vendor">{{ product.vendor }}</div>
-      {% endif %}
+       
       <a class="product-title" href="{{ product.url | within: collection }}">
         {% if settings.enable_multilang %}
         <span class="lang1">{{ product.title | split: '|' | first }}</span>
@@ -70,6 +68,9 @@
         {% else %}
         {{ product.title | split: '|' | first }}
         {% endif %}
+        {% if settings.show_vendor %}
+      <div class="product-vendor"></div>
+      {% endif %}
       </a>
        {% if settings.display_product_reviews %}
       <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
