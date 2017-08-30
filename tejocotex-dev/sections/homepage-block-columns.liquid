@@ -1,0 +1,89 @@
+{% if section.settings.homepage_heading != blank %}
+  <div class="widget-new-title {{section.id}} container homepage_columns">
+    <div class="widget-title wow fadeInUp">
+
+    <div class="row">         
+              
+              <div class="col-sm-6"> 
+                      <h2>{{ section.settings.homepage_heading | escape}}</h2>
+                      <p>{{ section.settings.homepage_text | newline_to_br}}</p>
+              </div> <!--- END CONTENT -->
+                    
+              <div class=" col-sm-6">
+                  <h2>{{ section.settings.homepage_heading_2 | escape}}
+                  </h2>
+                      <p>{{ section.settings.homepage_text_2 | newline_to_br}}</p>
+
+                   <ul class="payment-methods">
+                   {% for block in section.blocks %}
+                   {%- assign img_url = block.settings.image | img_url: '68x68' -%}
+                    <li><img src="{{ img_url }}"  class="slide-img " alt="{{ block.settings.image.alt }}" />
+                    </li>
+                   {% endfor %}
+                  </ul>
+              </div><!--- END CONTENT-IMAGE -->
+
+
+
+    </div>
+  </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+  "name": "Two Columns",
+	"class": "index-section homepage-block-columns",
+    "settings": [
+        {
+          "type": "text",
+          "id": "homepage_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "homepage_text",
+          "label": "Text"
+        },
+          {
+        "type": "header",
+        "content": "Second Column"
+      },
+       {
+          "type": "text",
+          "id": "homepage_heading_2",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "homepage_text_2",
+          "label": "Text"
+        }
+	     ],
+
+     "presets": [
+       {
+         "name": "Two Columns Row",
+         "category": "Homepage Text"
+       }
+  	],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+    ]
+    }
+    ]
+  }
+{% endschema %}
+<style>
+.homepage-block-columns {
+  background-color: #f3f3f3;
+}
+</style>
