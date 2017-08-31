@@ -242,11 +242,15 @@
               {% else %} 
               <input type="submit" name="add" class="btn" {% if settings.enable_multilang %}data-translate="products.product.unavailable"{%endif%} id="product-add-to-cart" disabled value="{{ 'products.product.unavailable' | t }}">          
               {% endif %}
-            </form>            
+            </form>
+            
           </div>
           
           {% include 'wishlist-product' %}
-
+          {% if section.settings.display_checkout_icon %}
+            {%- assign img_url = section.settings.checkout_image | img_url: '313x41' -%}
+            <img class="checkout-icon" style="width:auto;" src="{{ img_url }}"  alt="{{ block.settings.image.alt }}" />
+            {% endif %}
           {% if section.settings.display_product_detail_tag %}         
           <div class="tags">
             <i class="icon-tags" {% if settings.enable_multilang %}data-translate="blogs.article.tags"{%endif%}>{{ 'blogs.article.tags' | t }}</i> 
@@ -774,6 +778,18 @@ jQuery(function($) {
         "id": "display_availability",
         "label": "Display Availability?",
         "default": true
+      }
+      ,
+      {
+        "type": "checkbox",
+        "id": "display_checkout_icon",
+        "label": "Display Checkout Icon?",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_image",
+        "label": "Checkout Icon"
       },
       {
         "type": "text",
