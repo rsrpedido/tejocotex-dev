@@ -208,7 +208,19 @@
                 {% endif %}
                 {% endif %}
               </div>
-              
+
+              <div class="checklist">
+                <ul>
+                   {% for block in section.blocks %}
+                    {% if block.type == 'checklist' %}
+                      {% if block.settings.checklist_text != blank %}
+                          <li>{{ block.settings.checklist_text }}</li>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+
               {% if product.available %} 
               <label for="quantity" {% if settings.enable_multilang %}data-translate="cart.label.quantity"{%endif%}>{{ 'cart.label.quantity' | t }}: </label>
               <div class="dec button">-</div>
@@ -237,6 +249,10 @@
                 <label><b {% if settings.enable_multilang %}data-translate="cart.general.subtotal"{%endif%}>{{ 'cart.general.subtotal' | t }}</b>:</label><span>{{ product.price | money }}</span>
               </div>
               {% endif %}
+               {% if section.settings.display_checkout_icon %}
+                {%- assign img_url = section.settings.checkout_image | img_url: '313x41' -%}
+                <img class="checkout-icon" style="width:auto;" src="{{ img_url }}"  alt="{{ block.settings.image.alt }}" />
+              {% endif %}
 
               <input type="submit" name="add" class="btn" {% if settings.enable_multilang %}data-translate="products.product.add_to_cart"{%endif%} id="product-add-to-cart" value="{{ 'products.product.add_to_cart' | t }}">
               {% else %} 
@@ -244,13 +260,32 @@
               {% endif %}
             </form>
             
+
           </div>
           
           {% include 'wishlist-product' %}
-          {% if section.settings.display_checkout_icon %}
-            {%- assign img_url = section.settings.checkout_image | img_url: '313x41' -%}
-            <img class="checkout-icon" style="width:auto;" src="{{ img_url }}"  alt="{{ block.settings.image.alt }}" />
-            {% endif %}
+
+          {% if section.settings.display_product_badge %}
+            <div class="product-badge wow fadeInUp" data-wow-delay="200ms">
+              <p>{{ section.settings.custom_product_badge_title | split: '|' | first }}</p>
+
+              <ul>
+                {% if section.settings.custom_product_badge1 != blank %}
+                 <li><img src="{{ section.settings.custom_product_badge1 | img_url: "master" }}" alt="{{ section.settings.custom_product_badge1 }}" /></li>
+                {% endif %}
+                 {% if section.settings.custom_product_badge2 != blank %}
+                 <li><img src="{{ section.settings.custom_product_badge2 | img_url: "master" }}" alt="{{ section.settings.custom_product_badge2 }}" /></li>
+                {% endif %}
+                 {% if section.settings.custom_product_badge3 != blank %}
+                 <li><img src="{{ section.settings.custom_product_badge3 | img_url: "master" }}" alt="{{ section.settings.custom_product_badge3 }}" /></li>
+                {% endif %}
+                 {% if section.settings.custom_product_badge4 != blank %}
+                 <li><img src="{{ section.settings.custom_product_badge4 | img_url: "master" }}" alt="{{ section.settings.custom_product_badge4 }}" /></li>
+                {% endif %}
+              </ul>
+            </div>
+          {% endif %}
+      
           {% if section.settings.display_product_detail_tag %}         
           <div class="tags">
             <i class="icon-tags" {% if settings.enable_multilang %}data-translate="blogs.article.tags"{%endif%}>{{ 'blogs.article.tags' | t }}</i> 
@@ -922,7 +957,7 @@ jQuery(function($) {
         "label": "Display Size Chart?",
         "default": true
       },
-	 {
+	    {
         "type": "text",
         "id": "custom_size_chart_title",
         "label": "Custom Size Chart Title",
@@ -982,7 +1017,56 @@ jQuery(function($) {
           }
         ],
         "default": "collection"
+      },
+      {
+        "type": "checkbox",
+        "id": "display_product_badge",
+        "label": "Display Product Badge?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "custom_product_badge_title",
+        "label": "Custom Product Badge Title",
+        "default": "4 Great reasons to buy from us:"
+      },
+      {
+        "type": "image_picker",
+        "id": "custom_product_badge1",
+        "label": "Product Badge Image"
+      },
+      
+      {
+        "type": "image_picker",
+        "id": "custom_product_badge2",
+        "label": "Product Badge Image"
+      },
+      
+      {
+        "type": "image_picker",
+        "id": "custom_product_badge3",
+        "label": "Product Badge Image"
+      },
+      
+      {
+        "type": "image_picker",
+        "id": "custom_product_badge4",
+        "label": "Product Badge Image"
       }
-   ]
-  }
+
+  ],
+   "blocks": [
+      {
+        "type": "checklist",
+        "name": "Checklist",
+        "settings": [
+          {
+            "type": "text",
+            "id": "checklist_text",
+            "label": "Add Text"
+          }
+        ]
+      }
+  ]
+}
 {% endschema %}
