@@ -1,3 +1,42 @@
+{% if section.settings.footer_heading != blank %}
+  <div class="widget-new-title {{section.id}} container homepage_columns">
+    <div class="widget-title wow fadeInUp">
+
+    <div class="row">         
+              
+              <div class="col-sm-6"> 
+                      <h2>{{ section.settings.footer_heading | escape}}</h2>
+                      <p>{{ section.settings.footer_text | newline_to_br}}</p>
+              </div> <!--- END CONTENT -->
+                    
+              <div class=" col-sm-6">
+                  <h2>{{ section.settings.footer_heading_2 | escape}}
+                  </h2>
+                      <p>{{ section.settings.footer_text_2 | newline_to_br}}</p>
+
+                {% if section.settings.show_payment_icons %}
+          {% assign payment_string = 'visa,visa_electron,master,maestro,american_express,solo,paypal,amazon_payments,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,stripe' %}
+          {% assign methods = payment_string | split: ',' %}
+
+          <ul class="payment-methods">  
+            {% for method in methods %}
+              {%- assign display_current_method = method | prepend: 'payment_display_' -%}
+              {% if section.settings[display_current_method] %}
+                {%- assign current_method_icon = method | prepend: 'icon_' -%}
+                <li><img src="{{ section.settings[current_method_icon] | img_url: '60x60' }}" alt="{{ method }}"></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+              </div><!--- END CONTENT-IMAGE -->
+
+
+
+    </div>
+  </div>
+  </div>
+{% endif %}
+
 <footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-top">
@@ -76,20 +115,7 @@
               {% endif %}
             </address>
           {% endif %}
-        {% if section.settings.show_payment_icons %}
-          {% assign payment_string = 'visa,visa_electron,master,maestro,american_express,solo,paypal,amazon_payments,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,stripe' %}
-          {% assign methods = payment_string | split: ',' %}
-
-          <ul class="payment-methods">	
-            {% for method in methods %}
-              {%- assign display_current_method = method | prepend: 'payment_display_' -%}
-              {% if section.settings[display_current_method] %}
-                {%- assign current_method_icon = method | prepend: 'icon_' -%}
-                <li><img src="{{ section.settings[current_method_icon] | img_url: '66x22' }}" alt="{{ method }}"></li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        {% endif %}
+        
     </div>
     {% endif %}
   </div>
@@ -100,6 +126,29 @@
     "name": "Footer",
     "settings": [
 	{
+          "type": "text",
+          "id": "footer_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "footer_text",
+          "label": "Text"
+        },
+          {
+        "type": "header",
+        "content": "Second Column"
+      },
+       {
+          "type": "text",
+          "id": "footer_heading_2",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "footer_text_2",
+          "label": "Text"
+        },{
         "type": "header",
         "content": "Footer Background"
       },
@@ -205,6 +254,7 @@
         "id": "bg-footer-img",
        "label": "Upload a new image"
       },
+         
       {
         "type": "header",
         "content": "Footer Line Color "

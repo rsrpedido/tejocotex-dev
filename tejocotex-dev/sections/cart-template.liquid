@@ -157,7 +157,15 @@
       {% if additional_checkout_buttons %}
       <p>{{ content_for_additional_checkout_buttons }}</p>
       {% endif %}
-
+       <ul class="payment-icon">   
+      {% for type in shop.enabled_payment_types %}
+        
+          <li>
+           <img src="{{ type | payment_type_img_url }}" />
+          </li>
+     
+      {% endfor %}
+         </ul>
       {% unless cart.item_count == 0 %}
       {% include 'shipping-rates-calculator' %}
       {% endunless %}

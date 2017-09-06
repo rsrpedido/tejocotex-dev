@@ -75,8 +75,8 @@
     <main class="main-content {% if template contains 'index' or template contains 'contact' %}{% else %}container{% endif %}" role="main">
       {{ content_for_layout }}
     </main>
-
      {% section 'footer' %}
+    }
 
     {% if settings.enable_quick_view %}
       {% include 'quick-view-template' %}
