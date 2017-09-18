@@ -1,12 +1,17 @@
-{% if section.settings.footer_heading != blank %}
-  <div class="widget-new-title {{section.id}} container homepage_columns">
-    <div class="widget-title wow fadeInUp">
+ {% if section.settings.footer_heading != blank %}
+  <div class="footer-payment widget-new-title {{section.id}} container homepage_columns">
+    <div class="widget-title wow fadeInUp ">
 
     <div class="row">         
               
-              <div class="col-sm-6"> 
+              <div class="col-sm-6 footer-details">
+                <div class="footer-badge-container">
+                  <img src="{{ section.settings.footer_badge | img_url: '95x91' }}"/>
+                </div>
+                <div class="footer-text">
                       <h2>{{ section.settings.footer_heading | escape}}</h2>
                       <p>{{ section.settings.footer_text | newline_to_br}}</p>
+                </div>
               </div> <!--- END CONTENT -->
                     
               <div class=" col-sm-6">
@@ -125,7 +130,12 @@
   {
     "name": "Footer",
     "settings": [
-	{
+	 {      "type": "image_picker",
+          "id": "footer_badge",
+          "label": "Footer Badge"
+        },
+          {
+
           "type": "text",
           "id": "footer_heading",
           "label": "Heading"
